@@ -127,16 +127,16 @@ const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
 let storedLocation;
 
 setInterval(() => {
-  fetch("http://api.open-notify.org/iss-now.json")
+  fetch("https://api.wheretheiss.at/v1/satellites/25544")
     .then((res) => res.json())
     .then((data) => {
-      let lat = data.iss_position.latitude;
-      let long = data.iss_position.longitude;
+      let lat = data.latitude;
+      let long = data.longitude;
 
       console.log("lat: ", lat);
       console.log("long: ", long);
 
-      fetch(`http://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
+      fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
