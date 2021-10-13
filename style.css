@@ -1,21 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-image: linear-gradient(
-    0deg,
-    rgba(247, 247, 247, 1) 23.8%,
-    rgba(252, 221, 221, 1) 92%
-  );
+  background-image: linear-gradient(0deg, rgba(247, 247, 247, 1) 23.8%, rgba(252, 221, 221, 1) 92%);
+
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin: 0;
 }
 
@@ -36,7 +33,7 @@ body {
 }
 
 .img-container::after {
-  content: '';
+  content: "";
   background-color: #fff;
   border-radius: 50%;
   position: absolute;
