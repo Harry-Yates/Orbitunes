@@ -127,7 +127,7 @@ const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
 let storedLocation;
 
 setInterval(() => {
-  fetch("http://api.open-notify.org/iss-now.json")
+  fetch("https://api.open-notify.org/iss-now.json")
     .then((res) => res.json())
     .then((data) => {
       let lat = data.iss_position.latitude;
@@ -160,7 +160,7 @@ setInterval(() => {
         });
     });
 
-  fetch("http://api.open-notify.org/astros.json")
+  fetch("https://api.open-notify.org/astros.json")
     .then((res) => res.json())
     .then((data) => {
       let people = data.number;
