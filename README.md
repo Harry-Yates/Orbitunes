@@ -1,2 +1,10 @@
-# Time-Space-Radio
-A radio player that picks stations based upon the International Space Station position in space. 
+## Music Player
+
+Create beautiful UI to play music stored in the "music folder" using the HTML5 audio API
+
+## Project Specifications
+
+- Create UI for music player including spinning image and song detail popup
+- Add play and pause functionality
+- Switch songs
+- Progress bar
