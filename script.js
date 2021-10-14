@@ -145,7 +145,7 @@ function postDataCard(lat, long, country) {
 }
 
 function generateRandomLocation() {
-  let number = generateRandomNumber(50);
+  let number = generateRandomNumber(80);
   switch (number) {
     case 1:
       console.log(number);
@@ -182,31 +182,34 @@ function generateRandomLocation() {
       return "It's JAWS - ACTUALLY P**PED ME PANTS 😱🦈";
     case 12:
       console.log(number);
-      return "Where do fish sleep? On the sea bed! lolz ";
+      return "Where do fish sleep? On the sea bed! lolz 😏";
     case 13:
       console.log(number);
-      return "Why did the fish blush? Because it saw the oceans bottom! ";
+      return "Why did the fish blush? Because it saw the oceans bottom! 😏";
     case 14:
       console.log(number);
       return "Whale, hello there! Well I laughed...😳 ";
     case 15:
       console.log(number);
-      return " & IIIII whale always love you! 🎶 ";
+      return " Quite fancy a nap actually 🥱";
     case 16:
       console.log(number);
       return " This app is sooo much better over countires, am I right? 🤔";
     case 17:
       console.log(number);
-      return " Uh ohh Winston just dropped his phone in space";
+      return " Winston just dropped his phone in space...Noob! 🤣";
     case 18:
       console.log(number);
-      return "I need more space...🛸";
+      return "I need more space...😏";
     case 19:
       console.log(number);
-      return "Space was cool before it mattered ☄️";
-    case 19:
+      return "Space was cool before it mattered 😏";
+    case 20:
       console.log(number);
-      return "Hang on the kids just fired a rocket @ the moon 🚀";
+      return "Hang on the kids have just fired a rocket @ the moon 🚀";
+    case 21:
+      console.log(number);
+      return "Jeff's rocked is sus looking..";
 
     default:
       console.log(number);
