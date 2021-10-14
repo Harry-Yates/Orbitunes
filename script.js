@@ -170,7 +170,7 @@ function generateRandomLocation() {
       return "Cheeky wave to Nepture 👋";
     case 8:
       console.log(number);
-      return "Ooooh Davy Jones locker 💰 ...";
+      return "Ooooh Davy Jones' locker 💰 ...Sneaky spot";
     case 9:
       console.log(number);
       return "Huuuuge iceburg - 🥶";
