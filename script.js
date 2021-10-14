@@ -210,28 +210,6 @@ function generateRandomLocation() {
       console.log(number);
       return "Above the shit";
   }
-  if (number < 25) {
-    console.log(number);
-    return "Above the ocean";
-  } else if (number === 25) {
-    console.log(number);
-    return "Above a fish";
-  } else if (number === 26) {
-    console.log(number);
-    return "Above a ship";
-  } else if (number === 27) {
-    console.log(number);
-    return "Above a pirate";
-  } else if (number === 28) {
-    console.log(number);
-    return "Above a whale";
-  } else if (number === 29) {
-    console.log(number);
-    return "Above lost person at sea";
-  } else if (number === 30) {
-    console.log(number);
-    return "Above nuclear submarine";
-  }
 }
 
 function generateRandomNumber(max) {
