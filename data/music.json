@@ -1,0 +1,44 @@
+[
+    {
+        "title": "Cold Heart (PNAU Remix)",
+        "artist": "Elton John, Dua Lipa",
+        "bpm": 116,
+        "audioSrc": "./audio/1.mp3",
+        "artworkSrc": "./artwork/1.mp3"
+    },
+    {
+        "title": "Whale",
+        "artist": "iday",
+        "bpm": 140,
+        "audioSrc": "",
+        "artworkSrc": ""
+    },
+    {
+        "title": "Shivers",
+        "artist": "Ed Sheeran",
+        "bpm": 141,
+        "audioSrc": "",
+        "artworkSrc": ""
+    },
+    {
+        "title": "Obsessed With You",
+        "artist": "Central Cee",
+        "bpm": 143,
+        "audioSrc": "",
+        "artworkSrc": ""
+    },
+    {
+        "title": "Love Nwantiti Remix ft. Joeboy & Kuami Eugene",
+        "artist": "CKay",
+        "bpm": 93,
+        "audioSrc": "",
+        "artworkSrc": ""
+    },
+    {
+        "title": "Heat Waves",
+        "artist": "Glass Animals",
+        "bpm": 81,
+        "audioSrc": "",
+        "artworkSrc": ""
+    }
+]

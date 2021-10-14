@@ -16,6 +16,19 @@ const info = document.querySelector(".info-box");
 // Song titles
 const songs = ["hey", "summer", "ukulele"];
 
+async function getSongData() {
+  return await fetch("./data/music.json")
+    .then(res => {
+      console.log(res);
+      return res.json()
+    })
+    .then(data => {
+      return data
+    })
+}
+// let songData = getSongData();
+
+
 // Keep track of song
 let songIndex = 2;
 
@@ -90,7 +103,7 @@ function setProgress(e) {
 }
 
 // Event listeners
-playBtn.addEventListener("onload", () => {
+window.addEventListener("onload", () => {
   const isPlaying = musicContainer.classList.contains("play");
 
   if (isPlaying) {
