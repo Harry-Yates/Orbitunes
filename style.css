@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
-
 * {
   box-sizing: border-box;
 }
@@ -10,11 +8,74 @@ body {
 
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
   font-family: "Lato", sans-serif;
   margin: 0;
+}
+
+/* =================
+Typography
+================= */
+
+h1,
+h2,
+h3,
+h4,
+a {
+  font-family: "Nunito", serif;
+  font-weight: 300;
+  color: #77838f;
+  margin-top: 0;
+  letter-spacing: 0.05em;
+}
+
+/* =================
+Large Paige Containers
+================= */
+
+.left-side-main-container {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+}
+
+.right-side-main-container {
+  right: 0;
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =================
+Info Box
+================= */
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  top: 40px;
+  left: 40px;
+  max-width: 375px;
+  height: 120px;
+  padding: 10px;
+}
+
+.info-box h4 {
+  line-height: 0px;
+}
+
+/* =================
+Music Player
+================= */
+
+#title {
+  color: #fff;
 }
 
 .music-container {
@@ -23,26 +84,33 @@ body {
   box-shadow: 0 20px 20px 0 rgba(252, 169, 169, 0.6);
   display: flex;
   padding: 20px 30px;
-  position: relative;
-  margin: 100px 0;
+  position: absolute;
+  margin-top: 300px;
   z-index: 10;
+  width: 500px;
+  left: 15%;
 }
 
 .img-container {
-  position: relative;
+  display: flex;
+  position: absolute;
   width: 110px;
+  zoom: 8;
+  left: 8vw;
+  bottom: -7vh;
 }
 
 .img-container::after {
   content: "";
-  background-color: #fff;
+  background-color: rgb(0, 0, 0);
   border-radius: 50%;
   position: absolute;
   bottom: 100%;
   left: 50%;
   width: 20px;
   height: 20px;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, -40%);
+  zoom: 3;
 }
 
 .img-container img {
@@ -54,7 +122,6 @@ body {
   bottom: 0;
   left: 0;
   animation: rotate 3s linear infinite;
-
   animation-play-state: paused;
 }
 
@@ -112,12 +179,36 @@ body {
   z-index: 0;
 }
 
+.music-info-savePlaylist {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0 0 15px 15px;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: calc(100% - 40px);
+  padding: 10px 10px 10px 150px;
+  opacity: 0;
+  transform: translateY(0%);
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+  z-index: 0;
+}
+
+.music-container.play .music-info-savePlaylist {
+  opacity: 1;
+  height: 300px;
+  transform: translateY(+10%);
+}
+
 .music-container.play .music-info {
   opacity: 1;
   transform: translateY(-100%);
 }
 
 .music-info h4 {
+  margin: 0;
+}
+
+.music-info-savePlaylist h4 {
   margin: 0;
 }
 
@@ -131,7 +222,7 @@ body {
 }
 
 .progress {
-  background-color: #fe8daa;
+  background-color: #393737;
   border-radius: 5px;
   height: 100%;
   width: 0%;

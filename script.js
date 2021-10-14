@@ -19,8 +19,8 @@ let songIndex = 0;
 // const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
 function getSongData() {
   return fetch("./data/music.json")
-    .then(res => res.json())
-    .then(data => data)
+    .then((res) => res.json())
+    .then((data) => data);
 }
 
 // Update song details
@@ -37,7 +37,7 @@ function playSong() {
   playBtn.querySelector("i.fas").classList.remove("fa-play");
   playBtn.querySelector("i.fas").classList.add("fa-pause");
 
-  console.log('pop music');
+  console.log("pop music");
 
   audio.play();
 }
@@ -73,7 +73,7 @@ function nextSong(songs) {
   }
 
   loadSong(songs[songIndex]);
-  
+
   if (isPlaying) {
     playSong();
   }
@@ -114,7 +114,6 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-
 // Time/song update
 audio.addEventListener("timeupdate", updateProgress);
 
@@ -129,8 +128,6 @@ const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
 let oceanLocation;
 let country;
 
-
-
 function postDataCard(lat, long, country) {
   let time = new Date();
   let hours = time.getHours();
@@ -139,12 +136,9 @@ function postDataCard(lat, long, country) {
   let formattedTime = `${hours}:${minutes}:${seconds}`;
 
   info.innerHTML = `
-  <h4>Time: </h4>
-  <p>${formattedTime}</p>
-  <h4>Latidude: </h4>
-  <p>${lat}</p>
-  <h4>Longitude: </h4>
-  <p>${long}</p>
+  <h4>Time: ${formattedTime}</h4>
+  <h4>Latidude: ${lat}</h4>
+  <h4>Longitude: ${long}</h4>
   <h4>Location: ${country} </h4>
   `;
 }
@@ -154,25 +148,25 @@ function generateRandomLocation() {
   switch (number) {
     case 1:
       console.log(number);
-      return "Above a fish";
+      return "🐠 Above a fish";
     case 2:
       console.log(number);
-      return "Above a ship";
+      return "⚓️ Above a ship";
     case 3:
       console.log(number);
-      return "Above a pirate";
+      return " 🏴‍☠️ Above Jack Sparrow arrggh!!";
     case 4:
       console.log(number);
-      return "Above a whale 🐳";
+      return "🐳 Above a whale ";
     case 5:
       console.log(number);
-      return "Above a nuclear submarine";
+      return "🦦 OMFG a sea otter! #adorabbbble";
     case 6:
       console.log(number);
       return "Above Tom Hanks and Wilson ⚽️";
     default:
       console.log(number);
-      return "Above the ocean";
+      return "🏝 Ocean views 🏖";
   }
 }
 
@@ -197,39 +191,37 @@ async function app() {
       .then((data) => {
         let lat = data.latitude;
         let long = data.longitude;
-  
+
         console.log("lat: ", lat);
         console.log("long: ", long);
-  
+
         fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
           .then((res) => res.json())
           .then((data) => {
             if (data.error) {
               let newOceanLocation = generateRandomLocation();
 
-              if(!aboveOcean) {
+              if (!aboveOcean) {
                 loadSong(songs[songIndex]);
                 playSong();
                 aboveOcean = true;
               }
-  
-              if (oceanLocation != null && oceanLocation != newOceanLocation) {
 
+              if (oceanLocation != null && oceanLocation != newOceanLocation) {
                 oceanLocation = newOceanLocation; // update oceanLocation
               } else {
                 oceanLocation = newOceanLocation;
               }
-  
+
               postDataCard(lat, long, newOceanLocation);
-  
             } else {
-              if(aboveOcean) {
+              if (aboveOcean) {
                 aboveOcean = false;
               }
               let newCountry = data.address.country;
               postDataCard(lat, long, country);
-              
-              if(country != newCountry) {
+
+              if (country != newCountry) {
                 country = newCountry;
                 nextSong(songs);
                 postDataCard(lat, long, country);
@@ -238,7 +230,6 @@ async function app() {
           });
       });
   }, 3000);
-  
 }
 
-window.addEventListener('load', app);
+window.addEventListener("load", app);
