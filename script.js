@@ -166,7 +166,7 @@ setInterval(() => {
       let people = data.number;
       console.log("ppl in space: ", people);
     });
-}, 1000);
+}, 3000);
 
 function postDataCard(lat, long, country) {
   let time = new Date();
@@ -186,7 +186,30 @@ function postDataCard(lat, long, country) {
 }
 
 function generateRandomLocation() {
-  let number = generateRandomNumber(30);
+  let number = generateRandomNumber(15);
+  switch (number) {
+    case 1:
+      console.log(number);
+      return "Above a fish";
+      case 2:
+      console.log(number);
+      return "Above a ship";
+      case 3:
+      console.log(number);
+      return "Above a pirate";
+      case 4:
+      console.log(number);
+      return "Above a whale 🐳";
+      case 5:
+      console.log(number);
+      return "Above a nuclear submarine";
+      case 6:
+      console.log(number);
+      return "Above Tom Hanks and Wilson ⚽️";
+      default:
+      console.log(number);
+      return "Above the shit";
+  }
   if (number < 25) {
     console.log(number);
     return "Above the ocean";
