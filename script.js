@@ -14,7 +14,7 @@ const cover = document.getElementById("cover");
 const info = document.querySelector(".info-box");
 
 // Song titles
-const songs = ["hey", "summer", "ukulele"];
+const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
 
 // Keep track of song
 let songIndex = 2;
@@ -191,22 +191,22 @@ function generateRandomLocation() {
     case 1:
       console.log(number);
       return "Above a fish";
-      case 2:
+    case 2:
       console.log(number);
       return "Above a ship";
-      case 3:
+    case 3:
       console.log(number);
       return "Above a pirate";
-      case 4:
+    case 4:
       console.log(number);
       return "Above a whale 🐳";
-      case 5:
+    case 5:
       console.log(number);
       return "Above a nuclear submarine";
-      case 6:
+    case 6:
       console.log(number);
       return "Above Tom Hanks and Wilson ⚽️";
-      default:
+    default:
       console.log(number);
       return "Above the shit";
   }
