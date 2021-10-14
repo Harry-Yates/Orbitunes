@@ -1,8 +1,6 @@
 // Music related
 const musicContainer = document.getElementById("music-container");
 const playBtn = document.getElementById("play");
-const prevBtn = document.getElementById("prev");
-const nextBtn = document.getElementById("next");
 
 const audio = document.getElementById("audio");
 const progress = document.getElementById("progress");
@@ -13,46 +11,40 @@ const cover = document.getElementById("cover");
 //Space related
 const info = document.querySelector(".info-box");
 
-// Song titles
-const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
-
-async function getSongData() {
-  return await fetch("./data/music.json")
-    .then(res => {
-      console.log(res);
-      return res.json()
-    })
-    .then(data => {
-      return data
-    })
-}
-// let songData = getSongData();
-
-
+let isPlaying = true;
 // Keep track of song
-let songIndex = 2;
+let songIndex = 0;
 
-// Initially load song details into DOM
-loadSong(songs[songIndex]);
+// Song titles
+// const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
+function getSongData() {
+  return fetch("./data/music.json")
+    .then(res => res.json())
+    .then(data => data)
+}
 
 // Update song details
 function loadSong(song) {
-  title.innerText = song;
-  audio.src = `music/${song}.mp3`;
-  cover.src = `images/${song}.jpg`;
+  title.innerText = song.title;
+  audio.src = song.audioSrc;
+  cover.src = song.imageSrc;
 }
 
 // Play song
 function playSong() {
+  isPlaying = true;
   musicContainer.classList.add("play");
   playBtn.querySelector("i.fas").classList.remove("fa-play");
   playBtn.querySelector("i.fas").classList.add("fa-pause");
+
+  console.log('pop music');
 
   audio.play();
 }
 
 // Pause song
 function pauseSong() {
+  isPlaying = false;
   musicContainer.classList.remove("play");
   playBtn.querySelector("i.fas").classList.add("fa-play");
   playBtn.querySelector("i.fas").classList.remove("fa-pause");
@@ -60,21 +52,20 @@ function pauseSong() {
   audio.pause();
 }
 
-// Previous song
-function prevSong() {
-  songIndex--;
+// // Previous song
+// function prevSong() {
+//   songIndex--;
 
-  if (songIndex < 0) {
-    songIndex = songs.length - 1;
-  }
+//   if (songIndex < 0) {
+//     songIndex = songs.length - 1;
+//   }
 
-  loadSong(songs[songIndex]);
-
-  playSong();
-}
+//   loadSong(songs[songIndex]);
+//   playSong();
+// }
 
 // Next song
-function nextSong() {
+function nextSong(songs) {
   songIndex++;
 
   if (songIndex > songs.length - 1) {
@@ -82,8 +73,10 @@ function nextSong() {
   }
 
   loadSong(songs[songIndex]);
-
-  playSong();
+  
+  if (isPlaying) {
+    playSong();
+  }
 }
 
 // Update progress bar
@@ -103,18 +96,17 @@ function setProgress(e) {
 }
 
 // Event listeners
-window.addEventListener("onload", () => {
-  const isPlaying = musicContainer.classList.contains("play");
+// window.addEventListener("load", () => {
+//   const isPlaying = musicContainer.classList.contains("play");
 
-  if (isPlaying) {
-    pauseSong();
-  } else {
-    playSong();
-  }
-});
+//   if (isPlaying) {
+//     pauseSong();
+//   } else {
+//     playSong();
+//   }
+// });
+
 playBtn.addEventListener("click", () => {
-  const isPlaying = musicContainer.classList.contains("play");
-
   if (isPlaying) {
     pauseSong();
   } else {
@@ -122,9 +114,6 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-// Change song
-prevBtn.addEventListener("click", prevSong);
-nextBtn.addEventListener("click", nextSong);
 
 // Time/song update
 audio.addEventListener("timeupdate", updateProgress);
@@ -137,49 +126,10 @@ audio.addEventListener("ended", nextSong);
 
 // Fetch apis
 const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
-let storedLocation;
+let oceanLocation;
+let country;
 
-setInterval(() => {
-  fetch("https://api.wheretheiss.at/v1/satellites/25544")
-    .then((res) => res.json())
-    .then((data) => {
-      let lat = data.latitude;
-      let long = data.longitude;
 
-      console.log("lat: ", lat);
-      console.log("long: ", long);
-
-      fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            // console.log("above the ocean");
-            let currentLocation = generateRandomLocation();
-            if (storedLocation != null) {
-              if (storedLocation != currentLocation) {
-                nextSong();
-                storedLocation = currentLocation;
-              }
-            } else {
-              storedLocation = currentLocation;
-            }
-            postDataCard(lat, long, currentLocation);
-          } else {
-            nextSong();
-            let country = data.address.country;
-            postDataCard(lat, long, country);
-            console.log("Country: ", data.address.country);
-          }
-        });
-    });
-
-  fetch("http://api.open-notify.org/astros.json")
-    .then((res) => res.json())
-    .then((data) => {
-      let people = data.number;
-      console.log("ppl in space: ", people);
-    });
-}, 3000);
 
 function postDataCard(lat, long, country) {
   let time = new Date();
@@ -187,6 +137,7 @@ function postDataCard(lat, long, country) {
   let minutes = time.getMinutes();
   let seconds = time.getSeconds();
   let formattedTime = `${hours}:${minutes}:${seconds}`;
+
   info.innerHTML = `
   <h4>Time: </h4>
   <p>${formattedTime}</p>
@@ -221,7 +172,7 @@ function generateRandomLocation() {
       return "Above Tom Hanks and Wilson ⚽️";
     default:
       console.log(number);
-      return "Above the shit";
+      return "Above the ocean";
   }
 }
 
@@ -229,9 +180,65 @@ function generateRandomNumber(max) {
   return (randomNumber = Math.floor(Math.random() * max));
 }
 
-// create storedLocation
+// create oceanLocation
 // get current location
 // check if we have anything in stored location
-// if not set storedLocation
+// if not set oceanLocation
 // else check if they are equal
 // if they are not equal change song
+
+async function app() {
+  let songs = await getSongData();
+  let aboveOcean;
+
+  setInterval(() => {
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
+      .then((res) => res.json())
+      .then((data) => {
+        let lat = data.latitude;
+        let long = data.longitude;
+  
+        console.log("lat: ", lat);
+        console.log("long: ", long);
+  
+        fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              let newOceanLocation = generateRandomLocation();
+
+              if(!aboveOcean) {
+                loadSong(songs[songIndex]);
+                playSong();
+                aboveOcean = true;
+              }
+  
+              if (oceanLocation != null && oceanLocation != newOceanLocation) {
+
+                oceanLocation = newOceanLocation; // update oceanLocation
+              } else {
+                oceanLocation = newOceanLocation;
+              }
+  
+              postDataCard(lat, long, newOceanLocation);
+  
+            } else {
+              if(aboveOcean) {
+                aboveOcean = false;
+              }
+              let newCountry = data.address.country;
+              postDataCard(lat, long, country);
+              
+              if(country != newCountry) {
+                country = newCountry;
+                nextSong(songs);
+                postDataCard(lat, long, country);
+              }
+            }
+          });
+      });
+  }, 3000);
+  
+}
+
+window.addEventListener('load', app);
