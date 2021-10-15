@@ -133,7 +133,10 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-addBtn.addEventListener("click", updateArray);
+addBtn.addEventListener("click", () => {
+  const song = setupSongData();
+  addSong('playlist', song);
+});
 
 // Time/song update
 audio.addEventListener("timeupdate", updateProgress);
@@ -259,6 +262,8 @@ function generateRandomNumber(max) {
 async function app() {
   let songs = await getSongData();
   let aboveOcean;
+  const list = getLocalStorage('playlist');
+  outputPlaylist(list);
 
   setInterval(() => {
     fetch("https://api.wheretheiss.at/v1/satellites/25544")
@@ -309,54 +314,96 @@ async function app() {
 
 window.addEventListener("load", app);
 
-function updateArray() {
-  let id = localStorage.length;
+function setupSongData() {
 
   let song = {
-    id: id,
     title: currentSong,
     artist: currentArtist,
     cover: currentCover,
     date: formatDate(),
   };
 
-  const playlist = document.querySelector(".playlist");
-  playlist.innerHTML += `
-  <tr data-id='${id}'>
-    <td><img width="25" height="25" src="${song.cover}" /></td>
-    <td>
-      <h4>${song.title}</h4>
-      <p>${song.artist}</p>
-    </td>
-    <td>${song.date}</td>
-    <td class='delete'>x</td>
-  </tr>
-  `;
+  return song;
+}
 
-  let lol = document.querySelector(`[data-id=${id}]`);
-  console.log(lol);
+function removeSong(id) {
 
-  storeDataInLocalStorage(`song ${id}`, song);
-  // id
-  // artist list
-  // song
-  // date
-  //onClick, grab the data of currently playing song
+}
+
+
+function addSong(playlist, song) {
+  let updatedPlaylist;
+  let storedPlaylist = getLocalStorage(playlist);
+  console.log(storedPlaylist);
+  if(!storedPlaylist) {
+    updatedPlaylist = []
+  } else {
+    updatedPlaylist = storedPlaylist;
+  }
+  updatedPlaylist.push(song);
+  console.log(updatedPlaylist);
+  setLocalStorage(playlist, updatedPlaylist);
+
+  outputPlaylist(updatedPlaylist);
+  // outputSong(song);
 }
 
 // key = songs, value = array of song objects
-function storeDataInLocalStorage(key, value) {
+function setLocalStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-function getDataFromLocalStorage(key) {}
+function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
 
-// create objects
-//  push objects to array of
-// store array in local storage
-// foreach function that innerHTMLs the data in playlist table
+// function outputSong(song, index) {
+//   const playlist = document.querySelector(".playlist tbody");
 
-// 1 store data in LS
-// 2 print LS data to dom
-// 3 remove data from LS
-// 4 update dom
+//     playlist.innerHTML += `
+//       <tr data-id='${song.id}'>
+//         <td><img width="25" height="25" src="${song.cover}" /></td>
+//         <td>
+//           <h4>${song.title}</h4>
+//           <p>${song.artist}</p>
+//         </td>
+//         <td>${song.date}</td>
+//         <td><button onclick="deleteSong(this, ${index})" id="deleteBtn">delete</button></td>
+//       </tr>
+//       `;
+//       console.log(index);
+// }
+
+function outputPlaylist(list) {
+  
+  if(list) {
+
+    let output = '';
+
+    list.forEach((song, index) => {
+      output += `
+      <tr>
+      <td><img width="25" height="25" src="${song.cover}" /></td>
+      <td>
+      <h4>${song.title}</h4>
+      <p>${song.artist}</p>
+      </td>
+      <td>${song.date}</td>
+      <td><button onclick="deleteSong(this, ${index})" id="deleteBtn">delete</button></td>
+      </tr>
+      `;
+  
+      const playlist = document.querySelector(".playlist tbody");
+      playlist.innerHTML = output;
+  
+    })
+  }
+}
+
+function deleteSong(el, index) {
+  el.parentElement.parentElement.remove();
+  let playlist = getLocalStorage('playlist');
+  playlist.splice(index, 1);
+  setLocalStorage('playlist', playlist);
+  outputPlaylist(playlist)
+}
