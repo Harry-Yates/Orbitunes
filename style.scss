@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #171717;
+  color: #efefef;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========
+  Left & Right Page Containers
+    ================= */
+
+.left,
+.right {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.right {
+  background: orange;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* =========
+  Stats Tracker
+    ================= */
+
+.tracker {
+  background: blue;
+}
+.music {
+  background: orange;
+}
+
+/* =========
+  Media Player
+    ================= */
+
+.btn {
+  &--lg {
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.music {
+  width: 90%;
+  margin: 1rem auto 0;
+  padding: 1rem;
+  background: grey;
+  border-radius: 1.5rem;
+}
+
+.media-player {
+  text-align: center;
+
+  &__info {
+    text-align: left;
+  }
+
+  &__details {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    background-color: red;
+
+    h5 {
+      margin-top: 0.6rem;
+    }
+  }
+
+  &__progress-bar {
+    width: 100%;
+    height: 3px;
+    background-color: #efefef;
+    margin-bottom: 1rem;
+  }
+
+  &__progress-fill {
+    background-color: #393737;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+  }
+  &__progress-circle {
+    position: absolute;
+    border-radius: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    background: red;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.playlist {
+  width: 100%;
+  max-height: 50vh;
+}
+th {
+  border: 1px solid green;
+  text-align: left;
+}
+
+td {
+  border: 1px solid red;
+}
+
+.vinyl {
+  width: 100vw;
+  height: 100vw;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+  animation: rotate 5s linear infinite;
+  animation-play-state: paused;
+
+  &.play {
+    animation-play-state: running;
+  }
+
+  &__inner {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+  }
+
+  .dot {
+    width: 25%;
+    height: 25%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    background-color: #171717;
+    z-index: 1;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translateY(50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(50%) rotate(360deg);
+  }
+}

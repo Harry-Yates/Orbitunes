@@ -2,52 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <title>Space Time Radio Player</title>
+    <title>Space Tunes Shuffle</title>
   </head>
   <body>
-    <div class="left-side-main-container">
-      <div class="info-box">
-        <h4>Now Bording the ISS 🛰</h4>
-        <h4>Time: 00:00:0</h4>
-        <h4>Latidude: Loading...</h4>
-        <h4>Longitude: Loading...</h4>
-        <h4>Location: 👽 ISS tunes loading...</h4>
-      </div>
+    <div class="overlay"></div>
+    <main>
 
-      <div class="music-container" id="music-container">
-        <div class="music-info">
-          <h4 id="title"></h4>
-          <div class="progress-container" id="progress-container">
-            <div class="progress" id="progress"></div>
-          </div>
-        </div>
-        <div class="music-info-savePlaylist">
-          <h4 id="Save Tunes"></h4>
-        </div>
+      <section class="left">
+        <article class="tracker">
+          <h4>Now Bording the ISS 🛰</h4>
+          <h4>Time: 00:00:00</h4>
+          <h4>Latidude: Loading...</h4>
+          <h4>Longitude: Loading...</h4>
+          <h4>Location: 👽 ISS tunes loading...</h4>
+        </article>
 
+        <section class="music">
+          <article class="media-player">
+            <h6>PLAYING NOW</h6>
+            <div class="media-player__details">
+              <div class="media-player__info">
+                <h4 id='title'>SONG</h4>
+                <h5 id='artist'>ARTIST</h5>
+              </div>
+              <button id="addBtn" class="btn btn--lg">
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+            <div class="media-player__progress-bar" id="progress-bar">
+              <div class="media-player__progress-fill" id="progress-fill">
+                <div class="media-player__progress-circle"  id="progress-circle"></div>
+              </div>
+            </div>
+            <article class="media-player__controls">
+              <button id="playBtn" class="btn btn--lg">
+                <i class="fas fa-play-circle"></i>
+              </button>
+            </article>
+          </article>
+          <table>
+            <tbody class="playlist">
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Date Added</th>
+                <th>x</th>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </section>
+      <section class="right">
         <audio src="music/Cold Heart.mp3" id="audio"></audio>
 
-        <div class="img-container">
-          <img src="./images/1200px-Vinyl_record.svg.png" alt="music-cover" id="cover" />
-        </div>
-
-        <div class="navigation">
-          <button id="play" class="action-btn action-btn-big">
-            <i class="fas fa-play"></i>
-          </button>
-          <button id="save" class="action-btn action-btn-big">
-            <i class="fas fa-save"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-side-main-container"></div>
-
+        <div class="vinyl" id='vinyl'>
+            <img class='vinyl__inner' src="./images/1200px-Vinyl_record.svg.png" alt="music-cover" id="cover" />
+            <div class="dot"></div>
+      </section>
+ 
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
+
+

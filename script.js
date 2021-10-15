@@ -1,19 +1,32 @@
 // Music related
-const musicContainer = document.getElementById("music-container");
-const playBtn = document.getElementById("play");
+// const vinyl = document.getElementById("music-container");
+const vinyl = document.getElementById("vinyl");
+const playBtn = document.getElementById("playBtn");
+const addBtn = document.getElementById("addBtn");
 
 const audio = document.getElementById("audio");
-const progress = document.getElementById("progress");
-const progressContainer = document.getElementById("progress-container");
+const progressContainer = document.getElementById("progress-bar");
+const progressCircle = document.getElementById("progress-circle");
+const progress = document.getElementById("progress-fill");
 const title = document.getElementById("title");
+const artist = document.getElementById("artist");
 const cover = document.getElementById("cover");
+// const musicContainer = document.getElementById("music-container");
+// const playBtn = document.getElementById("play");
+
+// const audio = document.getElementById("audio");
+// const progress = document.getElementById("progress");
+// const progressContainer = document.getElementById("progress-container");
+// const title = document.getElementById("title");
+// const cover = document.getElementById("cover");
 
 //Space related
-const info = document.querySelector(".info-box");
+const tracker = document.querySelector(".tracker");
 
 let isPlaying = true;
 // Keep track of song
 let songIndex = 0;
+let currentSong, currentArtist, currentCover;
 
 // Song titles
 // const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
@@ -26,16 +39,21 @@ function getSongData() {
 // Update song details
 function loadSong(song) {
   title.innerText = song.title;
+  artist.innerText = song.artist;
   audio.src = song.audioSrc;
   cover.src = song.imageSrc;
+
+  currentSong = song.title;
+  currentArtist = song.artist;
+  currentCover = song.imageSrc;
 }
 
 // Play song
 function playSong() {
   isPlaying = true;
-  musicContainer.classList.add("play");
-  playBtn.querySelector("i.fas").classList.remove("fa-play");
-  playBtn.querySelector("i.fas").classList.add("fa-pause");
+  vinyl.classList.add("play");
+  playBtn.querySelector("i.fas").classList.remove("fa-play-circle");
+  playBtn.querySelector("i.fas").classList.add("fa-pause-circle");
 
   console.log("pop music");
 
@@ -45,9 +63,9 @@ function playSong() {
 // Pause song
 function pauseSong() {
   isPlaying = false;
-  musicContainer.classList.remove("play");
-  playBtn.querySelector("i.fas").classList.add("fa-play");
-  playBtn.querySelector("i.fas").classList.remove("fa-pause");
+  vinyl.classList.remove("play");
+  playBtn.querySelector("i.fas").classList.add("fa-play-circle");
+  playBtn.querySelector("i.fas").classList.remove("fa-pause-circle");
 
   audio.pause();
 }
@@ -84,6 +102,7 @@ function updateProgress(e) {
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
+  progressCircle.style.left = `${progressPercent}%`;
 }
 
 // Set progress bar
@@ -97,7 +116,7 @@ function setProgress(e) {
 
 // Event listeners
 // window.addEventListener("load", () => {
-//   const isPlaying = musicContainer.classList.contains("play");
+//   const isPlaying = vinyl.classList.contains("play");
 
 //   if (isPlaying) {
 //     pauseSong();
@@ -113,6 +132,8 @@ playBtn.addEventListener("click", () => {
     playSong();
   }
 });
+
+addBtn.addEventListener("click", updateArray);
 
 // Time/song update
 audio.addEventListener("timeupdate", updateProgress);
@@ -135,13 +156,20 @@ function postDataCard(lat, long, country) {
   let seconds = time.getSeconds();
   let formattedTime = `${hours}:${minutes}:${seconds}`;
 
-  info.innerHTML = `
+  tracker.innerHTML = `
   <h4>ISS Orbit View 🛰</h4>
   <h4>Time: ${formattedTime}</h4>
   <h4>Latidude: ${lat}</h4>
   <h4>Longitude: ${long}</h4>
   <h4>Location: ${country} </h4>
   `;
+}
+
+function formatDate() {
+  var d = new Date();
+
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return d.getDate() + " " + monthNames[d.getMonth()];
 }
 
 function generateRandomLocation() {
@@ -170,7 +198,7 @@ function generateRandomLocation() {
       return "Cheeky wave to Nepture 👋";
     case 8:
       console.log(number);
-      return "Ooooh Davy Jones' locker 💰 ...Sneaky spot";
+      return "Ooooh Davy Jones' locker 💰... Sneaky spot tbf";
     case 9:
       console.log(number);
       return "Huuuuge iceburg - 🥶";
@@ -197,7 +225,7 @@ function generateRandomLocation() {
       return " This app is sooo much better over countires, am I right? 🤔";
     case 17:
       console.log(number);
-      return " Winston just dropped his phone in space...Noob! 🤣";
+      return " Winston dropped his phone in space...Noob! 🤣";
     case 18:
       console.log(number);
       return "I need more space...😏";
@@ -209,7 +237,7 @@ function generateRandomLocation() {
       return "Hang on the kids have just fired a rocket @ the moon 🚀";
     case 21:
       console.log(number);
-      return "Jeff's rocked is sus looking..";
+      return "Jeff's rocket looks sus ...";
 
     default:
       console.log(number);
@@ -249,7 +277,7 @@ async function app() {
               let newOceanLocation = generateRandomLocation();
 
               if (!aboveOcean) {
-                loadSong(songs[songIndex]);
+                loadSong(songs[0]);
                 playSong();
                 aboveOcean = true;
               }
@@ -280,3 +308,55 @@ async function app() {
 }
 
 window.addEventListener("load", app);
+
+function updateArray() {
+  let id = localStorage.length;
+
+  let song = {
+    id: id,
+    title: currentSong,
+    artist: currentArtist,
+    cover: currentCover,
+    date: formatDate(),
+  };
+
+  const playlist = document.querySelector(".playlist");
+  playlist.innerHTML += `
+  <tr data-id='${id}'>
+    <td><img width="25" height="25" src="${song.cover}" /></td>
+    <td>
+      <h4>${song.title}</h4>
+      <p>${song.artist}</p>
+    </td>
+    <td>${song.date}</td>
+    <td class='delete'>x</td>
+  </tr>
+  `;
+
+  let lol = document.querySelector(`[data-id=${id}]`);
+  console.log(lol);
+
+  storeDataInLocalStorage(`song ${id}`, song);
+  // id
+  // artist list
+  // song
+  // date
+  //onClick, grab the data of currently playing song
+}
+
+// key = songs, value = array of song objects
+function storeDataInLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getDataFromLocalStorage(key) {}
+
+// create objects
+//  push objects to array of
+// store array in local storage
+// foreach function that innerHTMLs the data in playlist table
+
+// 1 store data in LS
+// 2 print LS data to dom
+// 3 remove data from LS
+// 4 update dom
