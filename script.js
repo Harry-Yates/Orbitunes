@@ -52,8 +52,10 @@ function loadSong(song) {
 function playSong() {
   isPlaying = true;
   vinyl.classList.add("play");
-  playBtn.querySelector("i.fas").classList.remove("fa-play-circle");
-  playBtn.querySelector("i.fas").classList.add("fa-pause-circle");
+  progressCircle.classList.add("play");
+  playBtn.classList.add("play");
+  playBtn.querySelector("i.fas").classList.remove("fa-play");
+  playBtn.querySelector("i.fas").classList.add("fa-pause");
 
   console.log("pop music");
 
@@ -64,8 +66,10 @@ function playSong() {
 function pauseSong() {
   isPlaying = false;
   vinyl.classList.remove("play");
-  playBtn.querySelector("i.fas").classList.add("fa-play-circle");
-  playBtn.querySelector("i.fas").classList.remove("fa-pause-circle");
+  progressCircle.classList.remove("play");
+  playBtn.classList.remove("play");
+  playBtn.querySelector("i.fas").classList.add("fa-play");
+  playBtn.querySelector("i.fas").classList.remove("fa-pause");
 
   audio.pause();
 }
@@ -99,14 +103,17 @@ function nextSong(songs) {
 
 // Update progress bar
 function updateProgress(e) {
+  const overlay = document.getElementById('overlay');
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
-  progress.style.width = `${progressPercent}%`;
+  // progress.style.width = `${progressPercent}%`;
+  overlay.style.width = `${100 - progressPercent}%`;
   progressCircle.style.left = `${progressPercent}%`;
 }
 
 // Set progress bar
 function setProgress(e) {
+  console.log(this);
   const width = this.clientWidth;
   const clickX = e.offsetX;
   const duration = audio.duration;

@@ -1,3 +1,37 @@
+// Variables
+$black: #171717;
+$black-soft: #1d1d1d;
+$white: #efefef;
+// Palette
+$color-bg: #25282B;
+$color-gradient: linear-gradient(180deg, #272c30 0%, #181a1d 100%);
+$color-shadow-light: #373D43;
+$color-shadow-dark: #171718;
+
+
+$color-btn-prim: linear-gradient(145deg, #ff6111, #C82911);
+$color-btn-prim-clicked: linear-gradient(145deg, #C82911, #ff6111);
+
+$color-btn-sec: linear-gradient(145deg, #2E3237, #1B1D21);
+$color-btn-sec-clicked: linear-gradient(145deg, #1B1D21, #2E3237);
+
+// Box-shadow neumorphism
+$box-shadow-lg: 20px 20px 40px $color-shadow-dark,
+-20px -20px 40px $color-shadow-light;
+$box-shadow-sm: 10px 10px 20px $color-shadow-dark,
+-10px -10px 20px $color-shadow-light;
+$box-shadow-main-sm: 10px 10px 40px #141619,
+-10px -10px 40px #3c4348;
+
+// Button shadows
+$box-shadow-btn: 5px 5px 10px #252D30,
+-5px -5px 10px #252D30;
+$box-shadow-btn-sm: 2px 2px 10px #252D30,
+-2px -2px 10px #252D30;
+
+$progressBar-height: 8px;
+
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -5,7 +39,7 @@
 }
 
 body {
-  background: #171717;
+  background: $color-bg;
   color: #efefef;
   width: 100vw;
   height: 100vh;
@@ -30,8 +64,6 @@ main {
   flex-direction: column;
 }
 .right {
-  background: orange;
-  overflow: hidden;
   z-index: -1;
 }
 
@@ -40,10 +72,7 @@ main {
     ================= */
 
 .tracker {
-  background: blue;
-}
-.music {
-  background: orange;
+  // background: blue;
 }
 
 /* =========
@@ -51,19 +80,47 @@ main {
     ================= */
 
 .btn {
+  background: $color-btn-prim;
+  border-radius: 50%;
+  padding: 1rem;
+  // width: rem;
+  // height: 2rem;
+  display: flex;
+  // justify-content: center;
+  // align-items: center;
+  border: 1.5px solid #ff6111;
+
+  &:hover {
+    background: $color-btn-prim-clicked;
+
+  }
+
+  &.play {
+    background: $color-btn-prim-clicked;
+  }
+
+  i {
+    color: $white;
+    font-size: .7rem;
+  }
+
+  box-shadow: $box-shadow-btn;
   &--lg {
     font-size: 2rem;
-    background-color: transparent;
-    border: none;
   }
 }
 
 .music {
   width: 90%;
-  margin: 1rem auto 0;
+  max-width: 30rem;
+  margin: 5rem auto 0;
   padding: 1rem;
-  background: grey;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
+
+  background: $black-soft;
+  background: $color-gradient;
+  // background: #171717;
+  box-shadow:  $box-shadow-main-sm;
 }
 
 .media-player {
@@ -78,43 +135,66 @@ main {
     margin-top: 1rem;
     margin-bottom: 1rem;
     justify-content: space-between;
-    background-color: red;
 
     h5 {
       margin-top: 0.6rem;
     }
   }
+  
+  &__controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 
   &__progress-bar {
     width: 100%;
-    height: 3px;
+    height: $progressBar-height;
+    border-radius: 50px;
     background-color: #efefef;
     margin-bottom: 1rem;
     position: relative;
   }
-
+  
   &__progress-fill {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #393737;
     border-radius: 5px;
+    background: rgb(218,0,0);
+    background: linear-gradient(90deg, rgba(218,0,0,1) 0%, rgba(233,227,0,1) 50%, rgba(3,190,0,1) 100%);
     height: 100%;
-    width: 0%;
-    // transition: width 0.1s linear;
+    width: 100%;
+    transition: width 0.1s linear;
+    pointer-events: none;
+    box-shadow: inset -1px 1px 2px #090909,
+            inset 1px -1px 2px #5c5c5c;
+    
+    .overlay {
+      position: absolute;
+      border-radius: inherit;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background: #030303;
+      box-shadow: inset -1px 1px 2px #090909,
+              inset 1px -1px 2px #5c5c5c;
+      // background: #171717;
+    }
   }
   &__progress-circle {
     position: absolute;
     left: 0;
     top: 0;
     border-radius: 50%;
-    padding: .2rem;
-    width: .1rem;
-    height: .1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background: transparent;
-    border: .3rem solid black;
-    // transition: left 0.1s linear;
-    transform: translate(-50%, -50%);
+    background: $color-btn-sec;
+    box-shadow: $box-shadow-btn-sm;
+    pointer-events: none;
+    transform: translate(-50%, calc(-50% + #{$progressBar-height} / 2));
   }
 
 }
@@ -124,16 +204,16 @@ main {
   tbody {
     max-height: 50vh;
     overflow: scroll;
-    background-color:red
+    // background-color:red
   }
   
   th {
-    border: 1px solid green;
+    // border: 1px solid green;
     text-align: left;
   }
   
   td {
-    border: 1px solid red;
+    // border: 1px solid red;
   }
 }
 
@@ -148,6 +228,10 @@ main {
   transform: translateY(50%);
   animation: rotate 5s linear infinite;
   animation-play-state: paused;
+
+  // Neu attempt
+  background: #171717;
+  box-shadow: $box-shadow-lg;
 
   &.play {
     animation-play-state: running;
