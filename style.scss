@@ -1,23 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-// Variables
 $black: #171717;
 $black-soft: #1d1d1d;
 $white: #efefef;
+
 // Palette
 $color-bg: #25282B;
 $color-gradient: linear-gradient(180deg, #272c30 0%, #181a1d 100%);
+
+// Shadows
+// Box-shadow neumorphism
 $color-shadow-light: #373D43;
 $color-shadow-dark: #171718;
 
-
-$color-btn-prim: linear-gradient(145deg, #ff6111, #C82911);
-$color-btn-prim-clicked: linear-gradient(145deg, #C82911, #ff6111);
-
-$color-btn-sec: linear-gradient(145deg, #2E3237, #1B1D21);
-$color-btn-sec-clicked: linear-gradient(145deg, #1B1D21, #2E3237);
-
-// Box-shadow neumorphism
 $box-shadow-lg: 20px 20px 40px $color-shadow-dark,
 -20px -20px 40px $color-shadow-light;
 $box-shadow-sm: 10px 10px 20px $color-shadow-dark,
@@ -31,6 +26,17 @@ $box-shadow-btn: 5px 5px 10px #252D30,
 $box-shadow-btn-sm: 2px 2px 10px #252D30,
 -2px -2px 10px #252D30;
 
+// Colors
+$color-btn-prim: linear-gradient(145deg, #ff6111, #C82911);
+$color-btn-prim-clicked: linear-gradient(145deg, #C82911, #ff6111);
+
+$color-btn-sec: linear-gradient(145deg, #2E3237, #1B1D21);
+$color-btn-sec-clicked: linear-gradient(145deg, #1B1D21, #2E3237);
+
+$color-text-prim: #A6AAAB;
+$color-text-sec: #727377;
+
+// Sizing
 $progressBar-height: 8px;
 
 
@@ -55,8 +61,21 @@ main {
 }
 
 /* =========
+Typography
+  ================= */
+  h6, h5, p {
+    color: $color-text-sec;
+    font-weight: normal;
+  }
+
+  h4 {
+    color: $color-text-prim;
+  }
+
+
+/* =========
   Left & Right Page Containers
-    ================= */
+  ================= */
 
 .left,
 .right {
@@ -224,12 +243,23 @@ main {
   }
   
   th {
-    // border: 1px solid green;
+    color: $color-text-sec;
     text-align: left;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: .15rem;
+    font-size: .7rem;
   }
   
   td {
-    // border: 1px solid red;
+    color: $color-text-sec;
+    font-size: .7rem;
+
+    h4 {
+      font-weight: normal;
+      color: $color-text-prim;
+      font-size: .9rem;
+    }
   }
 }
 

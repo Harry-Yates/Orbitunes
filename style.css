@@ -20,8 +20,20 @@ main {
 }
 
 /* =========
+Typography
+  ================= */
+h6, h5, p {
+  color: #727377;
+  font-weight: normal;
+}
+
+h4 {
+  color: #A6AAAB;
+}
+
+/* =========
   Left & Right Page Containers
-    ================= */
+  ================= */
 .left,
 .right {
   position: relative;
@@ -162,8 +174,23 @@ main {
   overflow: scroll;
 }
 .playlist th {
+  color: #727377;
   text-align: left;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 0.7rem;
 }
+.playlist td {
+  color: #727377;
+  font-size: 0.7rem;
+}
+.playlist td h4 {
+  font-weight: normal;
+  color: #A6AAAB;
+  font-size: 0.9rem;
+}
+
 .vinyl {
   width: 100vw;
   height: 100vw;
