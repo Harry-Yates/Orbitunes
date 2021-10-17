@@ -106,9 +106,12 @@ function updateProgress(e) {
   const overlay = document.getElementById('overlay');
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
-  // progress.style.width = `${progressPercent}%`;
   overlay.style.width = `${100 - progressPercent}%`;
   progressCircle.style.left = `${progressPercent}%`;
+
+  const innerDot = document.getElementById('progress-circle-inner');
+  let dotColor = percentToColor(progressPercent);
+  innerDot.style.backgroundColor = dotColor;
 }
 
 // Set progress bar
@@ -119,6 +122,20 @@ function setProgress(e) {
   const duration = audio.duration;
 
   audio.currentTime = (clickX / width) * duration;
+}
+
+function percentToColor(percent) {
+  var r, g, b = 0;
+  if(percent < 50) {
+    r = 255;
+    g = Math.round(5.1 * percent);
+  }
+  else {
+    g = 255;
+    r = Math.round(510 - 5.10 * percent);
+  }
+  var h = r * 0x10000 + g * 0x100 + b * 0x1;
+  return '#' + ('000000' + h.toString(16)).slice(-6);
 }
 
 // Event listeners
@@ -169,7 +186,7 @@ function postDataCard(lat, long, country) {
   tracker.innerHTML = `
   <h4>ISS Orbit View 🛰</h4>
   <h4>Time: ${formattedTime}</h4>
-  <h4>Latidude: ${lat}</h4>
+  <h4>Latitude: ${lat}</h4>
   <h4>Longitude: ${long}</h4>
   <h4>Location: ${country} </h4>
   `;
