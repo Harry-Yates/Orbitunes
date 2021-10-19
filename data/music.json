@@ -54,14 +54,14 @@
         {
             "title": "Soaring",
             "artist": "Iday",
-            "bpm": 138,
+            "bpm": 129,
             "audioSrc": "music/soaring.mp3",
             "imageSrc": "images/soaring.jpg"
         },
         {
             "title": "Snow Waltz",
             "artist": "Iday",
-            "bpm": 138,
+            "bpm": 132,
             "audioSrc": "music/snow waltz.mp3",
             "imageSrc": "images/snow waltz.jpg"
         },
@@ -75,7 +75,7 @@
         {
             "title": "Autumn Romance",
             "artist": "Iday",
-            "bpm": 138,
+            "bpm": 140,
             "audioSrc": "music/autumn romance.mp3",
             "imageSrc": "images/autumn romance.jpg"
         }
