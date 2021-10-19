@@ -1,44 +1,48 @@
-[
-    {
-        "title": "Whale",
-        "artist": "iday",
-        "bpm": 140,
-        "audioSrc": "music/Whale.mp3",
-        "imageSrc": "images/Whale.jpg"
-    },
-    {
-        "title": "Cold Heart (PNAU Remix)",
-        "artist": "Elton John, Dua Lipa",
-        "bpm": 116,
-        "audioSrc": "music/Cold heart.mp3",
-        "imageSrc": "images/Cold heart.jpg"
-    },
-    {
-        "title": "Shivers",
-        "artist": "Ed Sheeran",
-        "bpm": 141,
-        "audioSrc": "music/Shivers.mp3",
-        "imageSrc": "images/Shivers.jpg"
-    },
-    {
-        "title": "Obsessed With You",
-        "artist": "Central Cee",
-        "bpm": 143,
-        "audioSrc": "music/Obsessed With You.mp3",
-        "imageSrc": "images/Obsessed With You.jpg"
-    },
-    {
-        "title": "Love Nwantiti Remix ft. Joeboy & Kuami Eugene",
-        "artist": "CKay",
-        "bpm": 93,
-        "audioSrc": "music/Love Nwantiti.mp3",
-        "imageSrc": "images/Love Nwantiti.jpg"
-    },
-    {
-        "title": "Heat Waves",
-        "artist": "Glass Animals",
-        "bpm": 81,
-        "audioSrc": "music/Heat Waves.mp3",
-        "imageSrc": "images/Heat Waves.jpg"
-    }
-]
+{
+    "regular": [
+        {
+            "title": "Cold Heart (PNAU Remix)",
+            "artist": "Elton John, Dua Lipa",
+            "bpm": 116,
+            "audioSrc": "music/Cold heart.mp3",
+            "imageSrc": "images/Cold heart.jpg"
+        },
+        {
+            "title": "Shivers",
+            "artist": "Ed Sheeran",
+            "bpm": 141,
+            "audioSrc": "music/Shivers.mp3",
+            "imageSrc": "images/Shivers.jpg"
+        },
+        {
+            "title": "Obsessed With You",
+            "artist": "Central Cee",
+            "bpm": 143,
+            "audioSrc": "music/Obsessed With You.mp3",
+            "imageSrc": "images/Obsessed With You.jpg"
+        },
+        {
+            "title": "Love Nwantiti Remix ft. Joeboy & Kuami Eugene",
+            "artist": "CKay",
+            "bpm": 93,
+            "audioSrc": "music/Love Nwantiti.mp3",
+            "imageSrc": "images/Love Nwantiti.jpg"
+        },
+        {
+            "title": "Heat Waves",
+            "artist": "Glass Animals",
+            "bpm": 81,
+            "audioSrc": "music/Heat Waves.mp3",
+            "imageSrc": "images/Heat Waves.jpg"
+        }
+    ],
+    "ocean": [
+        {
+            "title": "Whale",
+            "artist": "iday",
+            "bpm": 140,
+            "audioSrc": "music/Whale.mp3",
+            "imageSrc": "images/Whale.jpg"
+        }
+    ]
+}
