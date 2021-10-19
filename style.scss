@@ -93,8 +93,23 @@ h4 {
     ================= */
 
 .tracker {
-  margin: 1rem;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
   // background: blue;
+
+  &__list {
+    display: flex;
+
+    h5 {
+      margin-right: 0.2rem;
+      font-size: 1rem;
+      color: $color-text-prim;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
 }
 
 /* =========

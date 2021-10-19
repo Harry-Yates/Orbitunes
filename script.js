@@ -162,10 +162,10 @@ function postDataCard(lat, long, country) {
 
   tracker.innerHTML = `
   <h4>ISS Orbit View 🛰</h4>
-  <h5>Time: ${formattedTime}</h5>
-  <h5>Latitude: ${lat}</h5>
-  <h5>Longitude: ${long}</h5>
-  <h5>Location: ${country} </h5>
+          <div class="tracker__list"><h5>Time: </h5> <p>${formattedTime}</p></div>
+          <div class="tracker__list"><h5>Latidude: </h5> <p>${lat}</p></div>
+          <div class="tracker__list"><h5>Longitude: </h5> <p>${long}</p></div>
+          <div class="tracker__list"><h5>Location: </h5> <p>${country}</p></div>
   `;
 }
 
@@ -177,7 +177,7 @@ function formatDate() {
 }
 
 function generateRandomLocation() {
-  let number = generateRandomNumber(80);
+  let number = generateRandomNumber(110);
   switch (number) {
     case 1:
       console.log(number);
@@ -211,41 +211,32 @@ function generateRandomLocation() {
       return "Titanic went down right there ... 🚢";
     case 11:
       console.log(number);
-      return "It's JAWS - ACTUALLY P**PED ME PANTS 😱🦈";
+      return "It's JAWS!!!! 😱🦈";
     case 12:
       console.log(number);
       return "Where do fish sleep? On the sea bed! lolz 😏";
     case 13:
       console.log(number);
-      return "Why did the fish blush? Because it saw the oceans bottom! 😏";
+      return " Quite fancy a nap actually 🥱";
     case 14:
       console.log(number);
-      return "Whale, hello there! Well I laughed...😳 ";
+      return " This app is sooo much better over countires, am I right? 🤔";
     case 15:
       console.log(number);
-      return " Quite fancy a nap actually 🥱";
+      return " Winston dropped his phone in space...Noob! 🤣";
     case 16:
       console.log(number);
-      return " This app is sooo much better over countires, am I right? 🤔";
+      return "I need more space...😏";
     case 17:
       console.log(number);
-      return " Winston dropped his phone in space...Noob! 🤣";
-    case 18:
-      console.log(number);
-      return "I need more space...😏";
-    case 19:
-      console.log(number);
-      return "Space was cool before it mattered 😏";
-    case 20:
-      console.log(number);
       return "Hang on the kids have just fired a rocket @ the moon 🚀";
-    case 21:
+    case 18:
       console.log(number);
       return "Jeff's rocket looks sus ...";
 
     default:
       console.log(number);
-      return "🏝 Ocean Waves 🏖";
+      return "🏝 Orbiting Ocean Waves 🏖";
   }
 }
 
@@ -386,8 +377,8 @@ async function app() {
     fetch("https://api.wheretheiss.at/v1/satellites/25544")
       .then((res) => res.json())
       .then((data) => {
-        let lat = data.latitude;
-        let long = data.longitude;
+        let lat = data.latitude.toFixed(4);
+        let long = data.longitude.toFixed(4);
 
         console.log("lat: ", lat);
         console.log("long: ", long);

@@ -56,7 +56,24 @@ h4 {
   Stats Tracker
     ================= */
 .tracker {
-  margin: 1rem;
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+}
+
+.tracker__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.tracker__list h5 {
+  margin-right: 0.2rem;
+  font-size: 1rem;
+  color: #a6aaab;
+}
+
+.tracker__list p {
+  font-size: 0.9rem;
 }
 
 /* =========
