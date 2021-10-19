@@ -3,6 +3,8 @@
 const vinyl = document.getElementById("vinyl");
 const playBtn = document.getElementById("playBtn");
 const addBtn = document.getElementById("addBtn");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
 
 const audio = document.getElementById("audio");
 const progressContainer = document.getElementById("progress-bar");
@@ -11,32 +13,15 @@ const progress = document.getElementById("progress-fill");
 const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 const cover = document.getElementById("cover");
-// const musicContainer = document.getElementById("music-container");
-// const playBtn = document.getElementById("play");
 
-// const audio = document.getElementById("audio");
-// const progress = document.getElementById("progress");
-// const progressContainer = document.getElementById("progress-container");
-// const title = document.getElementById("title");
-// const cover = document.getElementById("cover");
-
-//Space related
 const tracker = document.querySelector(".tracker");
 
-let isPlaying = true;
-// Keep track of song
-let songIndex = 0;
-let currentSong, currentArtist, currentCover;
-
-// Song titles
-// const songs = ["Cold Heart", "Heat Waves", "Love Nwantiti", "Obsessed With You", "Shivers", "Whale"];
 function getSongData() {
   return fetch("./data/music.json")
     .then((res) => res.json())
     .then((data) => data);
 }
 
-// Update song details
 function loadSong(song) {
   title.innerText = song.title;
   artist.innerText = song.artist;
@@ -74,27 +59,56 @@ function pauseSong() {
   audio.pause();
 }
 
-// // Previous song
-// function prevSong() {
-//   songIndex--;
-
-//   if (songIndex < 0) {
-//     songIndex = songs.length - 1;
-//   }
-
-//   loadSong(songs[songIndex]);
-//   playSong();
-// }
+// Previous song
+function prevSong(songs) {
+    // If above ocean
+    if (songs.ocean) {
+      oceanIndex--;
+      
+      if (oceanIndex < 0) {
+        oceanIndex = songs.length - 1;
+      }
+      
+      loadSong(songs[oceanIndex]);
+    }
+    // If above land
+    else {
+      regularIndex--;
+  
+      if (regularIndex < 0) {
+        regularIndex = songs.length - 1;
+      }
+    
+      loadSong(songs[regularIndex]);
+    }
+  
+    if (isPlaying) {
+      playSong();
+    }
+}
 
 // Next song
 function nextSong(songs) {
-  songIndex++;
-
-  if (songIndex > songs.length - 1) {
-    songIndex = 0;
+  // If above ocean
+  if (songs.ocean) {
+    oceanIndex++;
+    
+    if (oceanIndex > songs.length - 1) {
+      oceanIndex = 0;
+    }
+    
+    loadSong(songs[oceanIndex]);
   }
+  // If above land
+  else {
+    regularIndex++;
 
-  loadSong(songs[songIndex]);
+    if (regularIndex > songs.length - 1) {
+      regularIndex = 0;
+    }
+  
+    loadSong(songs[regularIndex]);
+  }
 
   if (isPlaying) {
     playSong();
@@ -137,44 +151,6 @@ function percentToColor(percent) {
   var h = r * 0x10000 + g * 0x100 + b * 0x1;
   return '#' + ('000000' + h.toString(16)).slice(-6);
 }
-
-// Event listeners
-// window.addEventListener("load", () => {
-//   const isPlaying = vinyl.classList.contains("play");
-
-//   if (isPlaying) {
-//     pauseSong();
-//   } else {
-//     playSong();
-//   }
-// });
-
-playBtn.addEventListener("click", () => {
-  if (isPlaying) {
-    pauseSong();
-  } else {
-    playSong();
-  }
-});
-
-addBtn.addEventListener("click", () => {
-  const song = setupSongData();
-  addSong('playlist', song);
-});
-
-// Time/song update
-audio.addEventListener("timeupdate", updateProgress);
-
-// Click on progress bar
-progressContainer.addEventListener("click", setProgress);
-
-// Song ends
-audio.addEventListener("ended", nextSong);
-
-// Fetch apis
-const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
-let oceanLocation;
-let country;
 
 function postDataCard(lat, long, country) {
   let time = new Date();
@@ -276,68 +252,13 @@ function generateRandomNumber(max) {
   return (randomNumber = Math.floor(Math.random() * max));
 }
 
-// create oceanLocation
-// get current location
-// check if we have anything in stored location
-// if not set oceanLocation
-// else check if they are equal
-// if they are not equal change song
-
-async function app() {
-  let songs = await getSongData();
-  let aboveOcean;
-  const list = getLocalStorage('playlist');
-  outputPlaylist(list);
-
-  setInterval(() => {
-    fetch("https://api.wheretheiss.at/v1/satellites/25544")
-      .then((res) => res.json())
-      .then((data) => {
-        let lat = data.latitude;
-        let long = data.longitude;
-
-        console.log("lat: ", lat);
-        console.log("long: ", long);
-
-        fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.error) {
-              let newOceanLocation = generateRandomLocation();
-
-              if (!aboveOcean) {
-                loadSong(songs[0]);
-                playSong();
-                aboveOcean = true;
-              }
-
-              if (oceanLocation != null && oceanLocation != newOceanLocation) {
-                oceanLocation = newOceanLocation; // update oceanLocation
-              } else {
-                oceanLocation = newOceanLocation;
-              }
-
-              postDataCard(lat, long, newOceanLocation);
-            } else {
-              if (aboveOcean) {
-                aboveOcean = false;
-              }
-              let newCountry = data.address.country;
-              postDataCard(lat, long, country);
-
-              if (country != newCountry) {
-                country = newCountry;
-                nextSong(songs);
-                postDataCard(lat, long, country);
-              }
-            }
-          });
-      });
-  }, 3000);
+function updateIndex(index) {
+  console.log(index);
+  index++;
+  console.log(index);
 }
 
-window.addEventListener("load", app);
-
+// ============ Local Storage - adding and removing ============
 function setupSongData() {
 
   let song = {
@@ -349,12 +270,6 @@ function setupSongData() {
 
   return song;
 }
-
-function removeSong(id) {
-
-}
-
-
 function addSong(playlist, song) {
   let updatedPlaylist;
   let storedPlaylist = getLocalStorage(playlist);
@@ -371,35 +286,17 @@ function addSong(playlist, song) {
   outputPlaylist(updatedPlaylist);
   // outputSong(song);
 }
-
-// key = songs, value = array of song objects
+// Set stringified data to LS
 function setLocalStorage(key, value) {
+  // key = songs, value = array of song objects
   localStorage.setItem(key, JSON.stringify(value));
 }
-
+// Get parsed data from LS
 function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
-
-// function outputSong(song, index) {
-//   const playlist = document.querySelector(".playlist tbody");
-
-//     playlist.innerHTML += `
-//       <tr data-id='${song.id}'>
-//         <td><img width="25" height="25" src="${song.cover}" /></td>
-//         <td>
-//           <h4>${song.title}</h4>
-//           <p>${song.artist}</p>
-//         </td>
-//         <td>${song.date}</td>
-//         <td><button onclick="deleteSong(this, ${index})" id="deleteBtn">delete</button></td>
-//       </tr>
-//       `;
-//       console.log(index);
-// }
-
+// Print Playlist to DOM
 function outputPlaylist(list) {
-  
   if(list) {
 
     let output = '';
@@ -423,7 +320,7 @@ function outputPlaylist(list) {
     })
   }
 }
-
+// Delete song from LS and DOM
 function deleteSong(el, index) {
   el.parentElement.parentElement.remove();
   let playlist = getLocalStorage('playlist');
@@ -431,3 +328,111 @@ function deleteSong(el, index) {
   setLocalStorage('playlist', playlist);
   outputPlaylist(playlist)
 }
+
+// ============ Init and run app on load ============
+const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
+let oceanLocation;
+let country;
+
+let isPlaying = true;
+// Keep track of songs
+let regularIndex = 0;
+let oceanIndex = 0;
+
+// Keep track of current song, artist and cover art
+let currentSong, currentArtist, currentCover;
+
+async function app() {
+// Get all songs (both regular and ocean)
+let songs = await getSongData();
+let aboveOcean;
+
+let currentPlaylist;
+
+const list = getLocalStorage('playlist');
+outputPlaylist(list);
+
+// Event listeners
+playBtn.addEventListener("click", () => {
+  if (isPlaying) {
+    pauseSong();
+  } else {
+    playSong();
+  }
+});
+
+addBtn.addEventListener("click", () => {
+  const song = setupSongData();
+  addSong('playlist', song);
+});
+
+nextBtn.addEventListener('click', () => {
+  nextSong(currentPlaylist)
+});
+prevBtn.addEventListener('click', () => {
+  prevSong(currentPlaylist)
+});
+
+// Time/song update
+audio.addEventListener("timeupdate", updateProgress);
+
+// Click on progress bar
+progressContainer.addEventListener("click", setProgress);
+
+// Song ends
+audio.addEventListener("ended", () => {
+  nextSong(currentPlaylist);
+});
+
+setInterval(() => {
+  fetch("https://api.wheretheiss.at/v1/satellites/25544")
+    .then((res) => res.json())
+    .then((data) => {
+      let lat = data.latitude;
+      let long = data.longitude;
+
+      console.log("lat: ", lat);
+      console.log("long: ", long);
+
+      fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            let newOceanLocation = generateRandomLocation();
+            currentPlaylist = songs.ocean;
+            
+            if (!aboveOcean) {
+              aboveOcean = true;
+              nextSong(songs.ocean);
+              // playSong();
+              console.log(songs.ocean);
+            }
+            
+            if (oceanLocation != null && oceanLocation != newOceanLocation) {
+              oceanLocation = newOceanLocation; // update oceanLocation
+            } else {
+              oceanLocation = newOceanLocation;
+            }
+            
+            postDataCard(lat, long, newOceanLocation);
+          } 
+          else {
+            currentPlaylist = songs.regular;
+            if (aboveOcean) {
+              aboveOcean = false;
+            }
+            let newCountry = data.address.country;
+            postDataCard(lat, long, country);
+
+            if (country != newCountry) {
+              country = newCountry;
+              nextSong(songs.regular);
+              postDataCard(lat, long, country);
+            }
+          }
+        });
+    });
+}, 3000);
+}
+
+window.addEventListener("load", app);
