@@ -1,44 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 $black: #171717;
 $black-soft: #1d1d1d;
 $white: #efefef;
 
 // Palette
-$color-bg: #25282B;
+$color-bg: #25282b;
 $color-gradient: linear-gradient(180deg, #272c30 0%, #181a1d 100%);
 
 // Shadows
 // Box-shadow neumorphism
-$color-shadow-light: #373D43;
+$color-shadow-light: #373d43;
 $color-shadow-dark: #171718;
 
-$box-shadow-lg: 20px 20px 40px $color-shadow-dark,
--20px -20px 40px $color-shadow-light;
-$box-shadow-sm: 10px 10px 20px $color-shadow-dark,
--10px -10px 20px $color-shadow-light;
-$box-shadow-main-sm: 10px 10px 40px #141619,
--10px -10px 40px #3c4348;
+$box-shadow-lg: 20px 20px 40px $color-shadow-dark, -20px -20px 40px $color-shadow-light;
+$box-shadow-sm: 10px 10px 20px $color-shadow-dark, -10px -10px 20px $color-shadow-light;
+$box-shadow-main-sm: 10px 10px 40px #141619, -10px -10px 40px #3c4348;
 
 // Button shadows
-$box-shadow-btn: 5px 5px 10px $color-shadow-dark,
--5px -5px 10px $color-shadow-light;
-$box-shadow-btn-sm: 2px 2px 10px $color-shadow-dark,
--2px -2px 10px $color-shadow-light;
+$box-shadow-btn: 5px 5px 10px $color-shadow-dark, -5px -5px 10px $color-shadow-light;
+$box-shadow-btn-sm: 2px 2px 10px $color-shadow-dark, -2px -2px 10px $color-shadow-light;
 
 // Colors
-$color-btn-prim: linear-gradient(145deg, #ff6111, #C82911);
-$color-btn-prim-clicked: linear-gradient(145deg, #C82911, #ff6111);
+$color-btn-prim: linear-gradient(145deg, #ff6111, #c82911);
+$color-btn-prim-clicked: linear-gradient(145deg, #c82911, #ff6111);
 
-$color-btn-sec: linear-gradient(145deg, #2E3237, #1B1D21);
-$color-btn-sec-clicked: linear-gradient(145deg, #1B1D21, #2E3237);
+$color-btn-sec: linear-gradient(145deg, #2e3237, #1b1d21);
+$color-btn-sec-clicked: linear-gradient(145deg, #1b1d21, #2e3237);
 
-$color-text-prim: #A6AAAB;
+$color-text-prim: #a6aaab;
 $color-text-sec: #727377;
 
 // Sizing
 $progressBar-height: 8px;
-
 
 * {
   box-sizing: border-box;
@@ -52,7 +46,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 main {
@@ -63,15 +57,16 @@ main {
 /* =========
 Typography
   ================= */
-  h6, h5, p {
-    color: $color-text-sec;
-    font-weight: normal;
-  }
+h6,
+h5,
+p {
+  color: $color-text-sec;
+  font-weight: normal;
+}
 
-  h4 {
-    color: $color-text-prim;
-  }
-
+h4 {
+  color: $color-text-prim;
+}
 
 /* =========
   Left & Right Page Containers
@@ -103,17 +98,16 @@ Typography
     ================= */
 
 .btn {
-  background: $color-btn-prim;
+  background: $color-btn-sec;
   border-radius: 50%;
   // padding: 1rem;
   width: 2rem;
   height: 2rem;
-  border: 2px solid #ff6111;
+  border: 2px solid #1b1d21;
   position: relative;
 
   &:hover {
     background: $color-btn-prim-clicked;
-
   }
 
   &.play {
@@ -126,7 +120,7 @@ Typography
     left: 50%;
     transform: translate(-50%, -50%);
     color: $white;
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 
   box-shadow: $box-shadow-btn;
@@ -134,6 +128,16 @@ Typography
     width: 3rem;
     height: 3rem;
     font-size: 2rem;
+    border: 2px solid #ff6111;
+    background: $color-btn-prim;
+  }
+
+  &:hover {
+    background: $color-btn-sec-clicked;
+  }
+
+  &.play {
+    background: $color-btn-sec-clicked;
   }
 }
 
@@ -147,7 +151,7 @@ Typography
   background: $black-soft;
   background: $color-gradient;
   // background: #171717;
-  box-shadow:  $box-shadow-main-sm;
+  box-shadow: $box-shadow-main-sm;
 
   // test to put play button in top right corner
   position: relative;
@@ -170,7 +174,7 @@ Typography
       margin-top: 0.6rem;
     }
   }
-  
+
   &__controls {
     display: flex;
     justify-content: center;
@@ -191,21 +195,20 @@ Typography
     margin-bottom: 1rem;
     position: relative;
   }
-  
+
   &__progress-fill {
     position: absolute;
     left: 0;
     top: 0;
     border-radius: 5px;
-    background: rgb(218,0,0);
-    background: linear-gradient(90deg, rgba(218,0,0,1) 0%, rgba(233,227,0,1) 50%, rgba(3,190,0,1) 100%);
+    background: rgb(218, 0, 0);
+    background: linear-gradient(90deg, rgba(218, 0, 0, 1) 0%, rgba(233, 227, 0, 1) 50%, rgba(3, 190, 0, 1) 100%);
     height: 100%;
     width: 100%;
     transition: width 0.1s linear;
     pointer-events: none;
-    box-shadow: inset -1px 1px 2px #090909,
-            inset 1px -1px 2px #5c5c5c;
-    
+    box-shadow: inset -1px 1px 2px #090909, inset 1px -1px 2px #5c5c5c;
+
     .overlay {
       position: absolute;
       border-radius: inherit;
@@ -214,8 +217,7 @@ Typography
       height: 100%;
       width: 100%;
       background: #030303;
-      box-shadow: inset -1px 1px 2px #090909,
-              inset 1px -1px 2px #5c5c5c;
+      box-shadow: inset -1px 1px 2px #090909, inset 1px -1px 2px #5c5c5c;
       // background: #171717;
     }
   }
@@ -243,7 +245,6 @@ Typography
       background: red;
     }
   }
-
 }
 
 .playlist {
@@ -253,28 +254,27 @@ Typography
     overflow: scroll;
     // background-color:red
   }
-  
+
   th {
     color: $color-text-sec;
     text-align: left;
     font-weight: normal;
     text-transform: uppercase;
-    letter-spacing: .15rem;
-    font-size: .7rem;
+    letter-spacing: 0.15rem;
+    font-size: 0.7rem;
   }
-  
+
   td {
     color: $color-text-sec;
-    font-size: .7rem;
+    font-size: 0.7rem;
 
     h4 {
       font-weight: normal;
       color: $color-text-prim;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
   }
 }
-
 
 .vinyl {
   width: 100vw;
