@@ -113,11 +113,11 @@ h4 {
   margin-right: 10px;
 
   &:hover {
-    background: $color-btn-prim-clicked;
+    background: $color-btn-sec-clicked;
   }
 
   &.play {
-    background: $color-btn-prim-clicked;
+    background: $color-btn-sec-clicked;
   }
 
   i {
@@ -131,10 +131,16 @@ h4 {
 
   box-shadow: $box-shadow-btn;
 
+  &--sm {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 2rem;
+  }
+
   &--lg {
     width: 3rem;
     height: 3rem;
-    font-size: 2rem;
+    font-size: 1rem;
     border: 2px solid #ff6111;
     background: $color-btn-prim;
   }
@@ -143,11 +149,11 @@ h4 {
     color: $white;
   }
 
-  &:hover {
+  &--lg:hover {
     background: $color-btn-prim-clicked;
   }
 
-  &.play {
+  &--lg.play {
     background: $color-btn-prim-clicked;
   }
 }
@@ -274,11 +280,17 @@ h4 {
     text-transform: uppercase;
     letter-spacing: 0.15rem;
     font-size: 0.7rem;
+    padding-bottom: 10px;
   }
 
   td {
     color: $color-text-sec;
     font-size: 0.7rem;
+    padding-bottom: 10px;
+
+    &:last-child {
+      text-align: right;
+    }
 
     h4 {
       font-weight: normal;

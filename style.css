@@ -76,11 +76,11 @@ h4 {
 }
 
 .btn:hover {
-  background: linear-gradient(145deg, #c82911, #ff6111);
+  background: linear-gradient(145deg, #1b1d21, #2e3237);
 }
 
 .btn.play {
-  background: linear-gradient(145deg, #c82911, #ff6111);
+  background: linear-gradient(145deg, #1b1d21, #2e3237);
 }
 
 .btn i {
@@ -93,10 +93,16 @@ h4 {
   font-size: 0.7rem;
 }
 
+.btn--sm {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 2rem;
+}
+
 .btn--lg {
   width: 3rem;
   height: 3rem;
-  font-size: 2rem;
+  font-size: 1rem;
   border: 2px solid #ff6111;
   background: linear-gradient(145deg, #ff6111, #c82911);
 }
@@ -105,11 +111,11 @@ h4 {
   color: #efefef;
 }
 
-.btn:hover {
+.btn--lg:hover {
   background: linear-gradient(145deg, #c82911, #ff6111);
 }
 
-.btn.play {
+.btn--lg.play {
   background: linear-gradient(145deg, #c82911, #ff6111);
 }
 
@@ -245,11 +251,17 @@ h4 {
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   font-size: 0.7rem;
+  padding-bottom: 10px;
 }
 
 .playlist td {
   color: #727377;
   font-size: 0.7rem;
+  padding-bottom: 10px;
+}
+
+.playlist td:last-child {
+  text-align: right;
 }
 
 .playlist td h4 {

@@ -61,30 +61,30 @@ function pauseSong() {
 
 // Previous song
 function prevSong(songs) {
-    // If above ocean
-    if (songs.ocean) {
-      oceanIndex--;
-      
-      if (oceanIndex < 0) {
-        oceanIndex = songs.length - 1;
-      }
-      
-      loadSong(songs[oceanIndex]);
+  // If above ocean
+  if (songs.ocean) {
+    oceanIndex--;
+
+    if (oceanIndex < 0) {
+      oceanIndex = songs.length - 1;
     }
-    // If above land
-    else {
-      regularIndex--;
-  
-      if (regularIndex < 0) {
-        regularIndex = songs.length - 1;
-      }
-    
-      loadSong(songs[regularIndex]);
+
+    loadSong(songs[oceanIndex]);
+  }
+  // If above land
+  else {
+    regularIndex--;
+
+    if (regularIndex < 0) {
+      regularIndex = songs.length - 1;
     }
-  
-    if (isPlaying) {
-      playSong();
-    }
+
+    loadSong(songs[regularIndex]);
+  }
+
+  if (isPlaying) {
+    playSong();
+  }
 }
 
 // Next song
@@ -92,11 +92,11 @@ function nextSong(songs) {
   // If above ocean
   if (songs.ocean) {
     oceanIndex++;
-    
+
     if (oceanIndex > songs.length - 1) {
       oceanIndex = 0;
     }
-    
+
     loadSong(songs[oceanIndex]);
   }
   // If above land
@@ -106,7 +106,7 @@ function nextSong(songs) {
     if (regularIndex > songs.length - 1) {
       regularIndex = 0;
     }
-  
+
     loadSong(songs[regularIndex]);
   }
 
@@ -117,13 +117,13 @@ function nextSong(songs) {
 
 // Update progress bar
 function updateProgress(e) {
-  const overlay = document.getElementById('overlay');
+  const overlay = document.getElementById("overlay");
   const { duration, currentTime } = e.srcElement;
   const progressPercent = (currentTime / duration) * 100;
   overlay.style.width = `${100 - progressPercent}%`;
   progressCircle.style.left = `${progressPercent}%`;
 
-  const innerDot = document.getElementById('progress-circle-inner');
+  const innerDot = document.getElementById("progress-circle-inner");
   let dotColor = percentToColor(progressPercent);
   innerDot.style.backgroundColor = dotColor;
 }
@@ -139,17 +139,18 @@ function setProgress(e) {
 }
 
 function percentToColor(percent) {
-  var r, g, b = 0;
-  if(percent < 50) {
+  var r,
+    g,
+    b = 0;
+  if (percent < 50) {
     r = 255;
     g = Math.round(5.1 * percent);
-  }
-  else {
+  } else {
     g = 255;
-    r = Math.round(510 - 5.10 * percent);
+    r = Math.round(510 - 5.1 * percent);
   }
   var h = r * 0x10000 + g * 0x100 + b * 0x1;
-  return '#' + ('000000' + h.toString(16)).slice(-6);
+  return "#" + ("000000" + h.toString(16)).slice(-6);
 }
 
 function postDataCard(lat, long, country) {
@@ -260,7 +261,6 @@ function updateIndex(index) {
 
 // ============ Local Storage - adding and removing ============
 function setupSongData() {
-
   let song = {
     title: currentSong,
     artist: currentArtist,
@@ -274,8 +274,8 @@ function addSong(playlist, song) {
   let updatedPlaylist;
   let storedPlaylist = getLocalStorage(playlist);
   console.log(storedPlaylist);
-  if(!storedPlaylist) {
-    updatedPlaylist = []
+  if (!storedPlaylist) {
+    updatedPlaylist = [];
   } else {
     updatedPlaylist = storedPlaylist;
   }
@@ -297,9 +297,8 @@ function getLocalStorage(key) {
 }
 // Print Playlist to DOM
 function outputPlaylist(list) {
-  if(list) {
-
-    let output = '';
+  if (list) {
+    let output = "";
 
     list.forEach((song, index) => {
       output += `
@@ -310,23 +309,22 @@ function outputPlaylist(list) {
       <p>${song.artist}</p>
       </td>
       <td>${song.date}</td>
-      <td><button onclick="deleteSong(this, ${index})" id="deleteBtn">delete</button></td>
+      <td><button onclick="deleteSong(this, ${index})" class="btn btn--sm" id="deleteBtn"><i class="fas fa-trash-alt"></i></button></td>
       </tr>
       `;
-  
+
       const playlist = document.querySelector(".playlist tbody");
       playlist.innerHTML = output;
-  
-    })
+    });
   }
 }
 // Delete song from LS and DOM
 function deleteSong(el, index) {
   el.parentElement.parentElement.remove();
-  let playlist = getLocalStorage('playlist');
+  let playlist = getLocalStorage("playlist");
   playlist.splice(index, 1);
-  setLocalStorage('playlist', playlist);
-  outputPlaylist(playlist)
+  setLocalStorage("playlist", playlist);
+  outputPlaylist(playlist);
 }
 
 // ============ Init and run app on load ============
@@ -343,96 +341,95 @@ let oceanIndex = 0;
 let currentSong, currentArtist, currentCover;
 
 async function app() {
-// Get all songs (both regular and ocean)
-let songs = await getSongData();
-let aboveOcean;
+  // Get all songs (both regular and ocean)
+  let songs = await getSongData();
+  let aboveOcean;
 
-let currentPlaylist;
+  let currentPlaylist;
 
-const list = getLocalStorage('playlist');
-outputPlaylist(list);
+  const list = getLocalStorage("playlist");
+  outputPlaylist(list);
 
-// Event listeners
-playBtn.addEventListener("click", () => {
-  if (isPlaying) {
-    pauseSong();
-  } else {
-    playSong();
-  }
-});
+  // Event listeners
+  playBtn.addEventListener("click", () => {
+    if (isPlaying) {
+      pauseSong();
+    } else {
+      playSong();
+    }
+  });
 
-addBtn.addEventListener("click", () => {
-  const song = setupSongData();
-  addSong('playlist', song);
-});
+  addBtn.addEventListener("click", () => {
+    const song = setupSongData();
+    addSong("playlist", song);
+  });
 
-nextBtn.addEventListener('click', () => {
-  nextSong(currentPlaylist)
-});
-prevBtn.addEventListener('click', () => {
-  prevSong(currentPlaylist)
-});
+  nextBtn.addEventListener("click", () => {
+    nextSong(currentPlaylist);
+  });
+  prevBtn.addEventListener("click", () => {
+    prevSong(currentPlaylist);
+  });
 
-// Time/song update
-audio.addEventListener("timeupdate", updateProgress);
+  // Time/song update
+  audio.addEventListener("timeupdate", updateProgress);
 
-// Click on progress bar
-progressContainer.addEventListener("click", setProgress);
+  // Click on progress bar
+  progressContainer.addEventListener("click", setProgress);
 
-// Song ends
-audio.addEventListener("ended", () => {
-  nextSong(currentPlaylist);
-});
+  // Song ends
+  audio.addEventListener("ended", () => {
+    nextSong(currentPlaylist);
+  });
 
-setInterval(() => {
-  fetch("https://api.wheretheiss.at/v1/satellites/25544")
-    .then((res) => res.json())
-    .then((data) => {
-      let lat = data.latitude;
-      let long = data.longitude;
+  setInterval(() => {
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
+      .then((res) => res.json())
+      .then((data) => {
+        let lat = data.latitude;
+        let long = data.longitude;
 
-      console.log("lat: ", lat);
-      console.log("long: ", long);
+        console.log("lat: ", lat);
+        console.log("long: ", long);
 
-      fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            let newOceanLocation = generateRandomLocation();
-            currentPlaylist = songs.ocean;
-            
-            if (!aboveOcean) {
-              aboveOcean = true;
-              nextSong(songs.ocean);
-              // playSong();
-              console.log(songs.ocean);
-            }
-            
-            if (oceanLocation != null && oceanLocation != newOceanLocation) {
-              oceanLocation = newOceanLocation; // update oceanLocation
+        fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              let newOceanLocation = generateRandomLocation();
+              currentPlaylist = songs.ocean;
+
+              if (!aboveOcean) {
+                aboveOcean = true;
+                nextSong(songs.ocean);
+                // playSong();
+                console.log(songs.ocean);
+              }
+
+              if (oceanLocation != null && oceanLocation != newOceanLocation) {
+                oceanLocation = newOceanLocation; // update oceanLocation
+              } else {
+                oceanLocation = newOceanLocation;
+              }
+
+              postDataCard(lat, long, newOceanLocation);
             } else {
-              oceanLocation = newOceanLocation;
-            }
-            
-            postDataCard(lat, long, newOceanLocation);
-          } 
-          else {
-            currentPlaylist = songs.regular;
-            if (aboveOcean) {
-              aboveOcean = false;
-            }
-            let newCountry = data.address.country;
-            postDataCard(lat, long, country);
-
-            if (country != newCountry) {
-              country = newCountry;
-              nextSong(songs.regular);
+              currentPlaylist = songs.regular;
+              if (aboveOcean) {
+                aboveOcean = false;
+              }
+              let newCountry = data.address.country;
               postDataCard(lat, long, country);
+
+              if (country != newCountry) {
+                country = newCountry;
+                nextSong(songs.regular);
+                postDataCard(lat, long, country);
+              }
             }
-          }
-        });
-    });
-}, 3000);
+          });
+      });
+  }, 3000);
 }
 
 window.addEventListener("load", app);
