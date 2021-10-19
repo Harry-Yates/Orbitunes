@@ -39,10 +39,45 @@
     "ocean": [
         {
             "title": "Whale",
-            "artist": "iday",
+            "artist": "Iday",
             "bpm": 140,
             "audioSrc": "music/Whale.mp3",
             "imageSrc": "images/Whale.jpg"
+        },
+        {
+            "title": "Sleep",
+            "artist": "Iday",
+            "bpm": 146,
+            "audioSrc": "music/sleep.mp3",
+            "imageSrc": "images/sleep.jpg"
+        },
+        {
+            "title": "Soaring",
+            "artist": "Iday",
+            "bpm": 138,
+            "audioSrc": "music/soaring.mp3",
+            "imageSrc": "images/soaring.jpg"
+        },
+        {
+            "title": "Snow Waltz",
+            "artist": "Iday",
+            "bpm": 138,
+            "audioSrc": "music/snow waltz.mp3",
+            "imageSrc": "images/snow waltz.jpg"
+        },
+        {
+            "title": "Spirit",
+            "artist": "Iday",
+            "bpm": 132,
+            "audioSrc": "music/spirit.mp3",
+            "imageSrc": "images/spirit.jpg"
+        },
+        {
+            "title": "Autumn Romance",
+            "artist": "Iday",
+            "bpm": 138,
+            "audioSrc": "music/autumn romance.mp3",
+            "imageSrc": "images/autumn romance.jpg"
         }
     ]
 }
