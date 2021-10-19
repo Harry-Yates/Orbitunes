@@ -23,7 +23,11 @@ main {
 /* =========
 Typography
   ================= */
-h6,
+h6 {
+  color: #727377;
+  font-weight: 700;
+}
+
 h5,
 p {
   color: #727377;
@@ -65,6 +69,8 @@ h4 {
   height: 2rem;
   border: 2px solid #1b1d21;
   position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
   -webkit-box-shadow: 5px 5px 10px #171718, -5px -5px 10px #373d43;
           box-shadow: 5px 5px 10px #171718, -5px -5px 10px #373d43;
 }
@@ -83,7 +89,7 @@ h4 {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  color: #efefef;
+  color: #727377;
   font-size: 0.7rem;
 }
 
@@ -95,12 +101,16 @@ h4 {
   background: linear-gradient(145deg, #ff6111, #c82911);
 }
 
+.btn--lg i {
+  color: #efefef;
+}
+
 .btn:hover {
-  background: linear-gradient(145deg, #1b1d21, #2e3237);
+  background: linear-gradient(145deg, #c82911, #ff6111);
 }
 
 .btn.play {
-  background: linear-gradient(145deg, #1b1d21, #2e3237);
+  background: linear-gradient(145deg, #c82911, #ff6111);
 }
 
 .music {
@@ -137,7 +147,7 @@ h4 {
 }
 
 .media-player__details h5 {
-  margin-top: 0.6rem;
+  margin-top: 0rem;
 }
 
 .media-player__controls {
@@ -148,6 +158,9 @@ h4 {
       -ms-flex-pack: center;
           justify-content: center;
   margin-bottom: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .media-player__progress-bar {
