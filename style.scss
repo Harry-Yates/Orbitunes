@@ -6,7 +6,9 @@ $white: #efefef;
 
 // Palette
 $color-bg: #25282b;
-$color-gradient: linear-gradient(180deg, #272c30 0%, #181a1d 100%);
+$color-gradient: linear-gradient(180deg, #353a40 0%, #181a1d 100%);
+
+// #272c30
 
 // Shadows
 // Box-shadow neumorphism
@@ -14,12 +16,12 @@ $color-shadow-light: #373d43;
 $color-shadow-dark: #171718;
 
 $box-shadow-lg: 20px 20px 40px $color-shadow-dark, -20px -20px 40px $color-shadow-light;
-$box-shadow-sm: 10px 10px 20px $color-shadow-dark, -10px -10px 20px $color-shadow-light;
-$box-shadow-main-sm: 10px 10px 40px #141619, -10px -10px 40px #3c4348;
+$box-shadow-sm: 2px 2px 20px $color-shadow-dark, -2px -2px 20px $color-shadow-light;
 
 // Button shadows
-$box-shadow-btn: 5px 5px 10px $color-shadow-dark, -5px -5px 10px $color-shadow-light;
-$box-shadow-btn-sm: 2px 2px 10px $color-shadow-dark, -2px -2px 10px $color-shadow-light;
+$box-shadow-btn: 2px 2px 10px $color-shadow-dark, -2px -2px 10px $color-shadow-light;
+$box-shadow-btn-sm: 1px 1px 10px $color-shadow-dark, -1px -1px 10px $color-shadow-light;
+$box-shadow-btn-lg: 3px 3px 10px $color-shadow-dark, -3px -3px 10px $color-shadow-light;
 
 // Colors
 $color-btn-prim: linear-gradient(145deg, #ff6111, #c82911);
@@ -99,6 +101,7 @@ h4 {
 
   &__list {
     display: flex;
+    align-items: center;
 
     h5 {
       margin-right: 0.2rem;
@@ -122,10 +125,9 @@ h4 {
   // padding: 1rem;
   width: 2rem;
   height: 2rem;
-  border: 2px solid #1b1d21;
+  border: 2px solid #202428;
   position: relative;
-  margin-left: 10px;
-  margin-right: 10px;
+  box-shadow: $box-shadow-btn;
 
   &:hover {
     background: $color-btn-sec-clicked;
@@ -144,20 +146,22 @@ h4 {
     font-size: 0.7rem;
   }
 
-  box-shadow: $box-shadow-btn;
-
   &--sm {
     width: 1.5rem;
     height: 1.5rem;
     font-size: 2rem;
+    box-shadow: $box-shadow-btn-sm;
   }
 
   &--lg {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     font-size: 1rem;
     border: 2px solid #ff6111;
     background: $color-btn-prim;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    box-shadow: $box-shadow-btn-lg;
   }
 
   &--lg i {
@@ -177,13 +181,14 @@ h4 {
   width: 90%;
   max-width: 30rem;
   margin: 5rem auto 0;
-  padding: 1rem;
+  padding: 1rem 2.5rem;
   border-radius: 2rem;
+  border: 1px solid rgba(53, 58, 64, 0.9);
 
   background: $black-soft;
   background: $color-gradient;
   // background: #171717;
-  box-shadow: $box-shadow-main-sm;
+  box-shadow: $box-shadow-sm;
 
   // test to put play button in top right corner
   position: relative;
@@ -191,9 +196,20 @@ h4 {
 
 .media-player {
   text-align: center;
+  font-weight: normal;
+
+  h6 {
+    font-weight: bold;
+  }
 
   &__info {
     text-align: left;
+
+    h4 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
   }
 
   &__details {
@@ -375,5 +391,25 @@ h4 {
   .right {
     width: 50%;
     height: 100%;
+  }
+
+  .vinyl {
+    // top: 0;
+    width: 100vh;
+    height: 100vh;
+    right: 0;
+    bottom: 0;
+    transform: translateX(50%);
+    // transform: translateY(100%);
+  }
+
+  @keyframes rotate {
+    from {
+      transform: translateX(50%) rotate(0deg);
+    }
+
+    to {
+      transform: translateX(50%) rotate(360deg);
+    }
   }
 }

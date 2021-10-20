@@ -163,7 +163,7 @@ function postDataCard(lat, long, country) {
   tracker.innerHTML = `
   <h4>ISS Orbit View 🛰</h4>
           <div class="tracker__list"><h5>Time: </h5> <p>${formattedTime}</p></div>
-          <div class="tracker__list"><h5>Latidude: </h5> <p>${lat}</p></div>
+          <div class="tracker__list"><h5>Latitude: </h5> <p>${lat}</p></div>
           <div class="tracker__list"><h5>Longitude: </h5> <p>${long}</p></div>
           <div class="tracker__list"><h5>Location: </h5> <p>${country}</p></div>
   `;
