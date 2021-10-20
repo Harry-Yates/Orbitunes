@@ -425,9 +425,6 @@ async function app() {
         let lat = data.latitude.toFixed(4);
         let long = data.longitude.toFixed(4);
 
-        console.log("lat: ", lat);
-        console.log("long: ", long);
-
         fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
           .then((res) => res.json())
           .then((data) => {
