@@ -15,7 +15,7 @@ $color-gradient: linear-gradient(180deg, #353a40 0%, #181a1d 100%);
 $color-shadow-light: #373d43;
 $color-shadow-dark: #171718;
 
-$box-shadow-lg: 20px 20px 40px $color-shadow-dark, -20px -20px 40px $color-shadow-light;
+$box-shadow-lg: 10px 10px 40px $color-shadow-dark, -10px -10px 40px $color-shadow-light;
 $box-shadow-sm: 2px 2px 20px $color-shadow-dark, -2px -2px 20px $color-shadow-light;
 
 // Button shadows
@@ -338,47 +338,139 @@ h4 {
   position: absolute;
   bottom: 0;
   transform: translateY(50%);
-  animation: rotate 5s linear infinite;
-  animation-play-state: paused;
-
+  border: 1rem solid $color-bg;
+  
   // Neu attempt
   background: $color-bg;
+  background: linear-gradient(-45deg, #24282c 0%, #181a1d 100%);
   box-shadow: $box-shadow-lg;
+  
+  &__record {
+    width: 97%;
+    height: 97%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #181a1d;
+  }
+  
 
-  &.play {
-    animation-play-state: running;
+
+  &__rivets {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    bottom: 0;
+    left: 3px;
+    z-index: 5;
+    border-radius: 50%;
+    background-image: radial-gradient(center center, circle closest-side, transparent 21%, transparent 31%,
+    #0f1113 32%, transparent 32%, transparent 42%,
+    #0f1113 43%, transparent 43%, transparent 53%,
+    #0f1113 54%, transparent 54%, transparent 64%,
+      #0f1113 65%, transparent 65%, transparent 75%,
+      #0f1113 76%, transparent 76%, transparent 86%,
+      #0f1113 87%, transparent 87%, transparent 97%,
+      #0f1113 98%, transparent 98% );
+    background-image: -webkit-radial-gradient(center center, circle closest-side, transparent 21%, transparent 31%,
+    #0f1113 32%, transparent 32%, transparent 42%,
+    #0f1113 43%, transparent 43%, transparent 53%,
+    #0f1113 54%, transparent 54%, transparent 64%,
+      #0f1113 65%, transparent 65%, transparent 75%,
+      #0f1113 76%, transparent 76%, transparent 86%,
+      #0f1113 87%, transparent 87%, transparent 97%,
+      #0f1113 98%, transparent 98% );
+  }
+
+  &__shine {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(255,255,255,0.1), transparent);
+
+    animation: reflection 15s linear infinite;
+    animation-play-state: paused;
+
+    
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 50%;
+      background-image: linear-gradient(-160deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+    }
   }
 
   &__inner {
-    width: 50%;
-    height: 50%;
+    width: 35%;
+    height: 35%;
     position: absolute;
-    bottom: 50%;
+    top: 50%;
     left: 50%;
+
+    top: calc(50% - calc(35% / 2));
+    left: calc(50% - calc(35% / 2));
     border-radius: 50%;
-    transform: translate(-50%, 50%);
   }
 
   .dot {
-    width: 25%;
-    height: 25%;
+    width: 3%;
+    height: 3%;
     position: absolute;
     bottom: 50%;
     left: 50%;
     border-radius: 50%;
+    border: 2px solid #0f1113;
     transform: translate(-50%, 50%);
-    background-color: #171717;
+    background-color: $color-bg;
     z-index: 1;
+  }
+
+  &__rivets, &__inner {
+    animation: rotate 5s linear infinite;
+    animation-play-state: paused;
+  }
+
+  // When play is active
+  &.play {
+    .vinyl__inner, .vinyl__rivets, .vinyl__shine {
+      animation-play-state: running;
+    }
   }
 }
 
 @keyframes rotate {
   from {
-    transform: translateY(50%) rotate(0deg);
+    transform: rotate(0deg);
   }
 
   to {
-    transform: translateY(50%) rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reflection {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(2deg);
+  }
+
+  75% {
+    transform: rotate(-1deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 
@@ -394,22 +486,10 @@ h4 {
   }
 
   .vinyl {
-    // top: 0;
     width: 100vh;
     height: 100vh;
     right: 0;
     bottom: 0;
     transform: translateX(50%);
-    // transform: translateY(100%);
-  }
-
-  @keyframes rotate {
-    from {
-      transform: translateX(50%) rotate(0deg);
-    }
-
-    to {
-      transform: translateX(50%) rotate(360deg);
-    }
   }
 }
