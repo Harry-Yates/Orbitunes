@@ -13,6 +13,8 @@ const progress = document.getElementById("progress-fill");
 const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 const cover = document.getElementById("cover");
+const mpCurrent = document.getElementById("current");
+const mpDuration = document.getElementById("duration");
 
 const tracker = document.querySelector(".tracker");
 
@@ -41,8 +43,6 @@ function playSong() {
   playBtn.classList.add("play");
   playBtn.querySelector("i.fas").classList.remove("fa-play");
   playBtn.querySelector("i.fas").classList.add("fa-pause");
-
-  console.log("pop music");
 
   audio.play();
 }
@@ -115,6 +115,16 @@ function nextSong(songs) {
   }
 }
 
+function formatTime(seconds) {
+
+  // console.log('formatTime: ', seconds);
+  minutes = Math.floor(seconds / 60);
+  minutes = (minutes >= 10) ? minutes : minutes;
+  seconds = Math.floor(seconds % 60);
+  seconds = (seconds >= 10) ? seconds : "0" + seconds;
+  return minutes + ":" + seconds;
+}
+
 // Update progress bar
 function updateProgress(e) {
   const overlay = document.getElementById("overlay");
@@ -126,6 +136,15 @@ function updateProgress(e) {
   const innerDot = document.getElementById("progress-circle-inner");
   let dotColor = percentToColor(progressPercent);
   innerDot.style.backgroundColor = dotColor;
+  
+  // Update time in DOM
+  let currentToSeconds = Math.floor(currentTime)
+  let durationToSeconds = Math.floor(duration)
+
+  if (!Number.isNaN(durationToSeconds)) {
+    mpCurrent.innerHTML = formatTime(currentToSeconds);
+    mpDuration.innerHTML = formatTime(durationToSeconds);
+  }
 }
 
 // Set progress bar

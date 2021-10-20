@@ -144,7 +144,7 @@ h4 {
   font-weight: bold;
 }
 .media-player__info {
-  text-align: left;
+  text-align: center;
 }
 .media-player__info h4 {
   font-size: 1.3rem;
@@ -152,19 +152,28 @@ h4 {
   margin-bottom: 0.2rem;
 }
 .media-player__details {
+  width: 100%;
   display: flex;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+.media-player__details .btn {
+  position: absolute;
+  right: 0;
 }
 .media-player__details h5 {
   margin-top: 0rem;
 }
-.media-player__controls {
+.media-player__track-length {
   display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-  align-items: center;
+  justify-content: space-between;
+  margin: 0 0.3rem 0.6rem;
+}
+.media-player__track-length p {
+  font-size: 0.7rem;
 }
 .media-player__progress-bar {
   width: 100%;
@@ -219,6 +228,12 @@ h4 {
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: red;
+}
+.media-player__controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  align-items: center;
 }
 
 .playlist {
