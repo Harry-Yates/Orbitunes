@@ -17,6 +17,28 @@ const mpCurrent = document.getElementById("current");
 const mpDuration = document.getElementById("duration");
 
 const tracker = document.querySelector(".tracker");
+const stars = document.querySelector('.stars');
+
+// Star functions
+function createStar() {
+  let star = document.createElement('div');
+
+  star.classList.add('star');
+
+  let size = generateRandomNumber(4);
+  star.style.width = `${size}px`;
+  star.style.height = `${size}px`;
+  star.style.left = `${generateRandomNumber(100)}%`;
+  star.style.top = `${generateRandomNumber(100)}%`;
+  star.style.animation = `twinkle 4s ${generateRandomNumber(10)}s linear infinite, drift 8s ${generateRandomNumber(10)}s linear infinite`;
+
+  return star;
+}
+function appendStars(number) {
+  for (let i = 0; i < number; i++) {
+    stars.append(createStar());
+  }
+}
 
 function getSongData() {
   return fetch("./data/music.json")
@@ -351,6 +373,10 @@ let oceanIndex = 0;
 let currentSong, currentArtist, currentCover;
 
 async function app() {
+  
+  let totalStars = 300;
+  appendStars(totalStars);
+
   // Get all songs (both regular and ocean)
   let songs = await getSongData();
   let aboveOcean;
@@ -443,3 +469,11 @@ async function app() {
 }
 
 window.addEventListener("load", app);
+
+
+// amount of stars
+// for loop that runs for the amount of stars
+// each iteration creates a div with class star
+// set a random size to each star
+// set random animation delay time to each star
+
