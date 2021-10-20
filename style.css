@@ -273,14 +273,14 @@ h4 {
   position: absolute;
   bottom: 0;
   transform: translateY(50%);
-  border: 1rem solid #25282b;
+  border: 1rem solid #24282c;
   background: #25282b;
   background: linear-gradient(-45deg, #24282c 0%, #181a1d 100%);
   box-shadow: 10px 10px 40px #171718, -10px -10px 40px #373d43;
 }
 .vinyl__record {
-  width: 97%;
-  height: 97%;
+  width: 99%;
+  height: 99%;
   border-radius: 50%;
   position: absolute;
   top: 50%;

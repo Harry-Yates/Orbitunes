@@ -356,7 +356,7 @@ h4 {
   position: absolute;
   bottom: 0;
   transform: translateY(50%);
-  border: 1rem solid $color-bg;
+  border: 1rem solid #24282c;
   
   // Neu attempt
   background: $color-bg;
@@ -364,8 +364,8 @@ h4 {
   box-shadow: $box-shadow-lg;
   
   &__record {
-    width: 97%;
-    height: 97%;
+    width: 99%;
+    height: 99%;
     border-radius: 50%;
     position: absolute;
     top: 50%;
