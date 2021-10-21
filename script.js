@@ -16,10 +16,11 @@ const cover = document.getElementById("cover");
 const mpCurrent = document.getElementById("current");
 const mpDuration = document.getElementById("duration");
 
-const tracker = document.querySelector(".tracker");
-const stars = document.querySelector('.stars');
+const tracker = document.querySelector(".tracker"); // Top left hand corner tracker
+const stars = document.querySelector('.stars'); // Starry background overlay
 
-// Star functions
+// ============ Star background ============
+// Create individual star with randomized properties
 function createStar() {
   let star = document.createElement('div');
 
@@ -34,29 +35,33 @@ function createStar() {
 
   return star;
 }
+// Append stars to background
 function appendStars(number) {
   for (let i = 0; i < number; i++) {
     stars.append(createStar());
   }
 }
 
+// ============ Song functionality ============
+
+// Retrieve song data from JSON
 function getSongData() {
   return fetch("./data/music.json")
     .then((res) => res.json())
     .then((data) => data);
 }
-
+// Load song data and update variables tracking currently playing song info
 function loadSong(song) {
   title.innerText = song.title;
   artist.innerText = song.artist;
   audio.src = song.audioSrc;
   cover.src = song.imageSrc;
 
+  // Update variables that that keeps track of current song info
   currentSong = song.title;
   currentArtist = song.artist;
   currentCover = song.imageSrc;
 }
-
 // Play song
 function playSong() {
   isPlaying = true;
@@ -68,7 +73,6 @@ function playSong() {
 
   audio.play();
 }
-
 // Pause song
 function pauseSong() {
   isPlaying = false;
@@ -80,7 +84,6 @@ function pauseSong() {
 
   audio.pause();
 }
-
 // Previous song
 function prevSong(songs) {
   // If above ocean
@@ -108,7 +111,6 @@ function prevSong(songs) {
     playSong();
   }
 }
-
 // Next song
 function nextSong(songs) {
   // If above ocean
@@ -137,16 +139,16 @@ function nextSong(songs) {
   }
 }
 
-function formatTime(seconds) {
+// ============ Progress bar ============
 
-  // console.log('formatTime: ', seconds);
+// Format time to 0:00 format
+function formatTime(seconds) {
   minutes = Math.floor(seconds / 60);
   minutes = (minutes >= 10) ? minutes : minutes;
   seconds = Math.floor(seconds % 60);
   seconds = (seconds >= 10) ? seconds : "0" + seconds;
   return minutes + ":" + seconds;
 }
-
 // Update progress bar
 function updateProgress(e) {
   const overlay = document.getElementById("overlay");
@@ -168,7 +170,6 @@ function updateProgress(e) {
     mpDuration.innerHTML = formatTime(durationToSeconds);
   }
 }
-
 // Set progress bar
 function setProgress(e) {
   console.log(this);
@@ -178,7 +179,7 @@ function setProgress(e) {
 
   audio.currentTime = (clickX / width) * duration;
 }
-
+// Calculate color from green to red
 function percentToColor(percent) {
   var r,
     g,
@@ -194,6 +195,7 @@ function percentToColor(percent) {
   return "#" + ("000000" + h.toString(16)).slice(-6);
 }
 
+// ============ Left hand corner tracker ============
 function postDataCard(lat, long, country) {
   let time = new Date();
   let hours = time.getHours();
@@ -209,14 +211,14 @@ function postDataCard(lat, long, country) {
           <div class="tracker__list"><h5>Location: </h5> <p>${country}</p></div>
   `;
 }
-
+// Format date to "20 Jan" format
 function formatDate() {
   var d = new Date();
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   return d.getDate() + " " + monthNames[d.getMonth()];
 }
-
+// Return a random ocean location
 function generateRandomLocation() {
   let number = generateRandomNumber(110);
   switch (number) {
@@ -280,18 +282,13 @@ function generateRandomLocation() {
       return "🏝 Orbiting Ocean Waves 🏖";
   }
 }
-
+// Return random number between 0 and "max"
 function generateRandomNumber(max) {
   return (randomNumber = Math.floor(Math.random() * max));
 }
 
-function updateIndex(index) {
-  console.log(index);
-  index++;
-  console.log(index);
-}
-
 // ============ Local Storage - adding and removing ============
+// Set song data and return song
 function setupSongData() {
   let song = {
     title: currentSong,
@@ -302,21 +299,20 @@ function setupSongData() {
 
   return song;
 }
+// Add song to playlist, store in LS and output in DOM 
 function addSong(playlist, song) {
   let updatedPlaylist;
   let storedPlaylist = getLocalStorage(playlist);
-  console.log(storedPlaylist);
+  
   if (!storedPlaylist) {
     updatedPlaylist = [];
   } else {
     updatedPlaylist = storedPlaylist;
   }
   updatedPlaylist.push(song);
-  console.log(updatedPlaylist);
   setLocalStorage(playlist, updatedPlaylist);
 
   outputPlaylist(updatedPlaylist);
-  // outputSong(song);
 }
 // Set stringified data to LS
 function setLocalStorage(key, value) {
@@ -359,13 +355,14 @@ function deleteSong(el, index) {
   outputPlaylist(playlist);
 }
 
-// ============ Init and run app on load ============
+// ============ Init and run app on window load ============
 const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
 let oceanLocation;
 let country;
 
 let isPlaying = true;
-// Keep track of songs
+
+// Keep track of currently playing/last played song index in both playlists
 let regularIndex = 0;
 let oceanIndex = 0;
 
@@ -374,19 +371,21 @@ let currentSong, currentArtist, currentCover;
 
 async function app() {
   
-  let totalStars = 300;
-  appendStars(totalStars);
+  appendStars(300);
 
   // Get all songs (both regular and ocean)
   let songs = await getSongData();
   let aboveOcean;
 
+  // Keep track of playlist to run
   let currentPlaylist;
 
   const list = getLocalStorage("playlist");
   outputPlaylist(list);
 
-  // Event listeners
+// ============ Event listeners ============
+
+  // Play/pause song 
   playBtn.addEventListener("click", () => {
     if (isPlaying) {
       pauseSong();
@@ -394,29 +393,28 @@ async function app() {
       playSong();
     }
   });
-
+  // Add song to playlist
   addBtn.addEventListener("click", () => {
     const song = setupSongData();
     addSong("playlist", song);
   });
-
+  // Play next song
   nextBtn.addEventListener("click", () => {
     nextSong(currentPlaylist);
   });
+  // Play prev song
   prevBtn.addEventListener("click", () => {
     prevSong(currentPlaylist);
   });
-
   // Time/song update
   audio.addEventListener("timeupdate", updateProgress);
-
-  // Click on progress bar
+  // Click on bar to move to that "time" in song
   progressContainer.addEventListener("click", setProgress);
-
-  // Song ends
+  // Play next song when current ends
   audio.addEventListener("ended", () => {
     nextSong(currentPlaylist);
   });
+
 
   setInterval(() => {
     fetch("https://api.wheretheiss.at/v1/satellites/25544")
@@ -429,14 +427,15 @@ async function app() {
           .then((res) => res.json())
           .then((data) => {
             if (data.error) {
+              // Generates random ocean location to output in tracker
               let newOceanLocation = generateRandomLocation();
+
+              // Above ocean - set currentPlaylist to play regular songs
               currentPlaylist = songs.ocean;
 
               if (!aboveOcean) {
                 aboveOcean = true;
                 nextSong(songs.ocean);
-                // playSong();
-                console.log(songs.ocean);
               }
 
               if (oceanLocation != null && oceanLocation != newOceanLocation) {
@@ -445,8 +444,10 @@ async function app() {
                 oceanLocation = newOceanLocation;
               }
 
+              // Print data to .tracker in DOM with generated ocean location
               postDataCard(lat, long, newOceanLocation);
             } else {
+              // Above country - set currentPlaylist to play regular songs
               currentPlaylist = songs.regular;
               if (aboveOcean) {
                 aboveOcean = false;
@@ -466,11 +467,3 @@ async function app() {
 }
 
 window.addEventListener("load", app);
-
-
-// amount of stars
-// for loop that runs for the amount of stars
-// each iteration creates a div with class star
-// set a random size to each star
-// set random animation delay time to each star
-
