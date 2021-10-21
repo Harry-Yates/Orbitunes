@@ -3,6 +3,7 @@
 @use './components/' as *;
 @use './layout' as *;
 
+// Reset
 * {
     box-sizing: border-box;
     padding: 0;
@@ -10,7 +11,7 @@
 }
 
 body {
-    background: $color-bg;
+    background-color: $color-bg;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
