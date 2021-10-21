@@ -1,0 +1,21 @@
+@use '../abstracts' as *;
+
+.rocket-wrapper {
+    display: none;
+    transform: rotate(35deg) scale(.5);
+    margin-left: 10rem;
+    margin-top: 2rem;
+}
+
+#rocket {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    animation: rocket 0.5s linear infinite both;
+}
+
+@media screen and (min-width: 768px) {
+    .rocket-wrapper {
+        display: block;
+    }
+}

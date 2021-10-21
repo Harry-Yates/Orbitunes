@@ -356,7 +356,7 @@ function deleteSong(el, index) {
 }
 
 // ============ Init and run app on window load ============
-const locIqKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
+const locationIqAPIKey = "pk.bb10b56f6e68b7f09bcfdf9e751977b9";
 let oceanLocation;
 let country;
 
@@ -423,7 +423,7 @@ async function app() {
         let lat = data.latitude.toFixed(4);
         let long = data.longitude.toFixed(4);
 
-        fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locIqKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
+        fetch(`https://us1.locationiq.com/v1/reverse.php?key=${locationIqAPIKey}&lat=${lat}&lon=${long}&zoom=3&format=json`)
           .then((res) => res.json())
           .then((data) => {
             if (data.error) {

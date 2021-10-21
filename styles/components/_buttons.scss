@@ -1,0 +1,58 @@
+@use '../abstracts' as *;
+
+.btn {
+    background: $color-btn-sec;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #202428;
+    position: relative;
+    box-shadow: $box-shadow-btn;
+
+    &:hover {
+        background: $color-btn-sec-clicked;
+    }
+
+    &.play {
+        background: $color-btn-sec-clicked;
+    }
+
+    i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $color-text-sec;
+        font-size: 0.7rem;
+    }
+
+    &--sm {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 2rem;
+        box-shadow: $box-shadow-btn-sm;
+    }
+
+    &--lg {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1rem;
+        border: 2px solid #ff6111;
+        background: $color-btn-prim;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        box-shadow: $box-shadow-btn-lg;
+    }
+
+    &--lg i {
+        color: $white;
+    }
+
+    &--lg:hover {
+        background: $color-btn-prim-clicked;
+    }
+
+    &--lg.play {
+        background: $color-btn-prim-clicked;
+    }
+}

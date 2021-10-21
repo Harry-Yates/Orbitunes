@@ -1,0 +1,11 @@
+// Box-shadow neumorphism
+$color-shadow-light: #373d43;
+$color-shadow-dark: #171718;
+
+$box-shadow-lg: 10px 10px 40px $color-shadow-dark, -10px -10px 40px $color-shadow-light;
+$box-shadow-sm: 2px 2px 20px $color-shadow-dark, -2px -2px 20px $color-shadow-light;
+
+// Button shadows
+$box-shadow-btn: 2px 2px 10px $color-shadow-dark, -2px -2px 10px $color-shadow-light;
+$box-shadow-btn-sm: 1px 1px 10px $color-shadow-dark, -1px -1px 10px $color-shadow-light;
+$box-shadow-btn-lg: 3px 3px 10px $color-shadow-dark, -3px -3px 10px $color-shadow-light;

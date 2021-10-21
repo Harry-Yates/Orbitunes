@@ -1,0 +1,17 @@
+@use '../abstracts' as *;
+
+.music {
+    width: 90%;
+    max-width: 30rem;
+    margin: 5rem auto 0;
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(53, 58, 64, 0.9);
+
+    background: $black-soft;
+    background: $color-gradient;
+    box-shadow: $box-shadow-sm;
+
+    // test to put play button in top right corner
+    position: relative;
+}

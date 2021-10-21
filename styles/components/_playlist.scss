@@ -1,0 +1,36 @@
+@use '../abstracts' as *;
+
+.playlist {
+    width: 100%;
+    
+    tbody {
+        max-height: 50vh;
+        overflow: scroll;
+    }
+
+    th {
+        color: $color-text-sec;
+        text-align: left;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        font-size: 0.7rem;
+        padding-bottom: 10px;
+    }
+
+    td {
+        color: $color-text-sec;
+        font-size: 0.7rem;
+        padding-bottom: 10px;
+
+        &:last-child {
+            text-align: right;
+        }
+
+        h4 {
+            font-weight: normal;
+            color: $color-text-prim;
+            font-size: 0.9rem;
+        }
+    }
+}
