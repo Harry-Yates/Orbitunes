@@ -2,7 +2,7 @@
 
 ---
 
-Music player that shuffles songs as the International Space Station passes through countries.
+Music Player that shuffles songs as the International Space Station (ISS) 🛰 moves across country borders and oceans.
 
 Hyper Island - If this, then that Module - Brief 2.
 
